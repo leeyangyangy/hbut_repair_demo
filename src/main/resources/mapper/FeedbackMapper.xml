@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyy.manager.modular.system.mapper.FeedbackMapper">
+    <resultMap id="feedbackBaseMap" type="com.lyy.manager.modular.system.entity.Feedback">
+        <id property="id" column="id"/>
+        <result property="fsno" column="fsno"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+    <!--    查询关联反馈  fsno==sno -->
+    <select id="findAllByFsno" resultType="com.lyy.manager.modular.system.entity.Feedback" parameterType="String">
+        SELECT f.feedback, f.create_time
+        from feedback f
+        WHERE fsno = #{sno}
+    </select>
+
+    <!--    添加反馈/留言-->
+    <insert id="addFeedback" parameterType="com.lyy.manager.modular.system.entity.Feedback">
+        insert into feedback (feedback, fsno) value (#{feedback},#{fsno})
+    </insert>
+</mapper>

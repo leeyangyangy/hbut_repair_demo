@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyy.manager.modular.system.mapper.WorkerMapper">
+    <resultMap id="workerBaseMap" type="com.lyy.manager.modular.system.entity.Worker">
+        <id property="id" column="id"/>
+        <result property="mno" column="mno"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="tel" column="tel"/>
+        <result property="avatar" column="avatar"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <resultMap id="findNeedRepairOrdersByMno" type="com.lyy.manager.modular.system.entity.Worker"
+               extends="workerBaseMap">
+        <collection property="ordersList" ofType="com.lyy.manager.modular.system.entity.Orders">
+            <id property="id" column="id"/>
+            <result property="mno" column="mno"/>
+            <result property="sno" column="sno"/>
+            <result property="variety" column="variety"/>
+            <result property="picture" column="picture"/>
+            <result property="detail" column="detail"/>
+            <result property="status" column="status"/>
+            <result property="createTime" column="create_time"/>
+            <result property="updateTime" column="update_time"/>
+            <result property="finishTime" column="finish_time"/>
+        </collection>
+    </resultMap>
+
+    <!--    师傅登录-->
+    <select id="workLogin" resultType="com.lyy.manager.modular.system.entity.Worker"
+            parameterType="com.lyy.manager.modular.system.param.LoginParam">
+        select w.username, w.password, w.tel
+        from worker w
+        where username = #{username}
+          and password = #{password}
+    </select>
+
+    <!--    根据工号查找所有正在处理的工单-->
+    <select id="findNeedRepairOrdersByMno" parameterType="String" resultMap="findNeedRepairOrdersByMno">
+        SELECT w.id,
+               w.NAME,
+               w.tel,
+               w.mno,
+               o.mno,
+               o.variety,
+               o.STATUS,
+               o.detail,
+               o.create_time,
+               o.finish_time,
+               o.update_time,
+               o.picture
+        FROM worker w,
+             orders o
+        WHERE o.mno = w.mno
+          AND o.`status` = '1'
+          AND w.mno = #{mno};
+    </select>
+
+    <!--    查询全部师傅-->
+    <select id="findAllWorker" resultType="com.lyy.manager.modular.system.entity.Worker">
+        select w.mno, w.name
+        from worker w
+    </select>
+
+</mapper>

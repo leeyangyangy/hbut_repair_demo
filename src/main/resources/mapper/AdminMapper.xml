@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyy.manager.modular.system.mapper.AdminMapper">
+    <resultMap id="adminBaseMap" type="com.lyy.manager.modular.system.entity.Admin">
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+    <select id="adminLogin" resultType="com.lyy.manager.modular.system.entity.Admin" parameterType="com.lyy.manager.modular.system.param.LoginParam">
+        SELECT a.username,
+               a.`name`,
+               a.tel,
+               a.id
+        FROM admin a
+        WHERE a.username = #{username}
+          AND a.password = #{password};
+    </select>
+</mapper>

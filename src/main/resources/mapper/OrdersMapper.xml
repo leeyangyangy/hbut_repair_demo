@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyy.manager.modular.system.mapper.OrdersMapper">
+    <!--   结果集映射-->
+    <resultMap id="ordersBaseMap" type="com.lyy.manager.modular.system.entity.Orders">
+        <id property="id" column="id"/>
+        <result property="mno" column="mno"/>
+        <result property="sno" column="sno"/>
+        <result property="variety" column="variety"/>
+        <result property="picture" column="picture"/>
+        <result property="detail" column="detail"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="finishTime" column="finish_time"/>
+    </resultMap>
+
+    <resultMap id="getStudentAddMap" extends="ordersBaseMap" type="com.lyy.manager.modular.system.entity.Orders">
+        <association property="student" javaType="com.lyy.manager.modular.system.entity.Student">
+            <result property="add" column="add"/>
+        </association>
+    </resultMap>
+    <!--    sql语句封装-->
+    <sql id="baseSql">
+        select o.id,
+               o.mno,
+               o.sno,
+               o.variety,
+               o.picture,
+               o.detail,
+               o.finish_time,
+               o.create_time,
+               o.update_time,
+               o.status
+        from orders o
+    </sql>
+
+    <!--    动态sql语句封装  学生学号或维修师傅工号  -->
+    <sql id="dynamicSql">
+        <where>
+            <if test="sno!=null">
+                and sno=#{sno}
+            </if>
+            <if test="mno!=null">
+                and mno=#{mno}
+            </if>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+        </where>
+    </sql>
+
+
+    <!--    管理员模块-->
+    <!--    管理员查询所有工单状态 ==不分状态的查询 -->
+    <select id="findAllOrders" resultMap="ordersBaseMap">
+        <include refid="baseSql"></include>
+    </select>
+
+    <!--    学生和师傅共用模块-->
+    <!--
+    mno    sno
+            查询  工单状态是已完成的
+    -->
+    <select id="finAllFinishOrderByNo" resultMap="ordersBaseMap"
+            parameterType="com.lyy.manager.modular.system.param.NoParam">
+        <include refid="baseSql"></include>
+        <include refid="dynamicSql"></include>
+        and `status` = '2'
+    </select>
+
+    <!--
+        查询  工单状态是正在处理的
+    -->
+    <select id="finAllFixingOrderByNo" resultMap="ordersBaseMap"
+            parameterType="com.lyy.manager.modular.system.param.NoParam">
+        <include refid="baseSql"></include>
+        <include refid="dynamicSql"></include>
+        and `status` = '1'
+    </select>
+
+    <!--
+    查询  工单状态是待接单
+    -->
+    <select id="finAllWaitForOrderByNo" resultMap="ordersBaseMap"
+            parameterType="com.lyy.manager.modular.system.param.NoParam">
+        <include refid="baseSql"></include>
+        <include refid="dynamicSql"></include>
+        and `status` = '0'
+    </select>
+
+    <!--    用户查询属于自己的所有状态的工单-->
+    <select id="findAllAnyOrdersByNo" resultMap="ordersBaseMap"
+            parameterType="com.lyy.manager.modular.system.param.NoParam">
+        <include refid="baseSql"></include>
+        <include refid="dynamicSql"></include>
+    </select>
+
+    <!--
+        用户删除所有状态工单
+        后期会完善正在进行的订单不允许删除   id必须有，如果为空不允许删除
+    -->
+    <delete id="delOrderById" parameterType="com.lyy.manager.modular.system.param.NoParam">
+        DELETE
+        FROM orders
+        <include refid="dynamicSql"></include>
+    </delete>
+
+    <!--    管理员和维修师傅共用更新模块-->
+    <update id="updateStatusAndMnoAndIdInt" parameterType="com.lyy.manager.modular.system.entity.Orders">
+        update orders
+        <trim prefix="set" suffixOverrides=",">
+            <if test="mno!=null">
+                mno=#{mno},
+            </if>
+            <if test="variety!=variety">
+                variety=#{variety},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="detail!=null">
+                detail=#{detail},
+            </if>
+            <if test="picture!=null">
+                picture=#{picture},
+            </if>
+            <if test="finishTime!=null">
+                finish_time=#{finishTime},
+            </if>
+        </trim>
+        <where>
+            <if test="sno!=null">
+                and sno=#{sno}
+            </if>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+        </where>
+    </update>
+
+    <!--    一对一查询-->
+    <select id="getStudentAddressById" resultMap="getStudentAddMap"
+            parameterType="com.lyy.manager.modular.system.param.NoParam">
+        select o.id,
+               o.mno,
+               o.sno,
+               o.variety,
+               o.picture,
+               o.detail,
+               o.finish_time,
+               o.create_time,
+               o.update_time,
+               o.status,
+               s.add,
+               s.name,
+               s.tel
+        from orders o,
+             student s
+        where o.id = #{id}
+          and o.mno = #{mno}
+          and s.sno = #{sno}
+    </select>
+
+</mapper>
