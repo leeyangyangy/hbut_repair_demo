@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ import java.util.Map;
  * @since 2022-10-26
  */
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/orders")
 public class AdminController {
 
     @Resource
@@ -43,23 +44,26 @@ public class AdminController {
 //    }
 
 //    获取所有工单和师傅
-    @RequestMapping("/orders/getAll")
+//    @RequestMapping("/getAll")
+    @GetMapping
     public ResponseData orderList() {
         List<Orders> ordersList = ordersService.findAllOrders();
         Map<String, Worker> workerList = workerService.findAllWorker();
         if (ordersList != null && workerList != null) {
-            List<Object> object=new ArrayList<>();
-            object.add(ordersList);
-            object.add(workerList);
-            return ResponseData.success(200, "数据获取成功",object);
+            Map<String,Object> map=new HashMap<>();
+            map.put("工单",ordersList);
+            map.put("师傅",workerList);
+            return ResponseData.success(20041, "数据获取成功",map);
         } else {
-            return ResponseData.error(404, "数据获取失败", 0);
+            return ResponseData.error(20040, "查询失败,请重试!", null);
         }
     }
 
 //    finAllWaitForOrderByNo
 
-    @RequestMapping(value = "/orders/update/working/{id}", method = RequestMethod.POST)
+//    管理员修改工单状态为已派单和分配维修师傅
+//    @RequestMapping(value = "/update/working/{id}", method = RequestMethod.POST)
+    @PutMapping("/{id}")
     public ResponseData updateToWorking(@RequestBody Orders orders, @PathVariable("id") int id) {
 //        orders.set
         orders.setId(id);
@@ -67,10 +71,10 @@ public class AdminController {
         int total = ordersService.updateStatusAndMnoAndIdInt(orders);
         if (total > 0) {
             System.out.println("修改成功");
-            return ResponseData.success(200, "修改成功", 1);
+            return ResponseData.success(20031, "修改成功", true);
         } else {
             System.out.println("修改失败，请联系管理员");
-            return ResponseData.error(500,"修改失败",0);
+            return ResponseData.error(20030,"修改失败",false);
         }
     }
 
