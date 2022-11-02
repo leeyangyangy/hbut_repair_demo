@@ -21,7 +21,7 @@ import java.util.List;
  * @since 2022-10-26
  */
 @RestController
-@RequestMapping("/worker")
+@RequestMapping("/worker/orders")
 public class WorkerController {
 
     @Resource
@@ -31,7 +31,8 @@ public class WorkerController {
     NoParam noParam = new NoParam();
 
     // 列出所有完成工单
-    @RequestMapping(value = "/orders/{mno}/finish", method = RequestMethod.GET)
+//    @RequestMapping(value = "/orders/{mno}/finish", method = RequestMethod.GET)
+    @GetMapping("/{mno}/finish")
     public ResponseData finish(@PathVariable("mno") String mno) {
 //        判断非空
         if (mno != null) {
@@ -40,21 +41,51 @@ public class WorkerController {
 //            执行功能
             List<Orders> list = ordersService.finAllFinishOrderByNo(noParam);
             if (list != null) {
-                return ResponseData.success(200, "获取成功", list);
+                return ResponseData.success(20041, "数据查询成功!", list);
             } else {
-                return ResponseData.success(200, "获取成功,但是数据库中没数据", 0);
+                return ResponseData.success(20040, "数据查询成功,但是数据库中没数据", null);
             }
         } else {
-            return ResponseData.error(404, "请求资源为空，请检查", 0);
+            return ResponseData.error(20040, "请求资源为空，请检查", null);
+        }
+    }
+
+    // 列出所有正在进行的工单
+//    @RequestMapping(value = "/orders/{mno}/working", method = RequestMethod.GET)
+    @GetMapping("/{mno}/working")
+    public ResponseData working(@PathVariable("mno") String mno) {
+        noParam.setMno(mno);
+        List<Orders> list = ordersService.finAllFixingOrderByNo(noParam);
+        if (list != null) {
+            return ResponseData.success(20041,"数据查询成功!",list);
+        } else {
+            return ResponseData.error(20040,"没有正在处理的工单",0);
+        }
+    }
+
+    // 列出所有正在进行的工单的详细信息
+//    @RequestMapping(value = "/orders/{mno}/working/{id}/details", method = RequestMethod.GET)
+    @GetMapping("/details")
+    public ResponseData showDetail(@RequestBody NoParam noParam) {
+//        noParam.setSno(sno);
+//        noParam.setMno(mno);
+//        noParam.setId(id);
+        System.out.println("获取详细");
+        Orders ordersDetails = ordersService.getStudentAddressById(noParam);
+        if (ordersDetails != null) {
+            return ResponseData.success(20041, "数据查询成功!", ordersDetails);
+        } else {
+            return ResponseData.error(20040, "获取失败，请联系管理员", null);
         }
     }
 
     //    师傅修改订单为已完成状态
-    @RequestMapping(value = "/orders/{mno}/update/{id}", method = RequestMethod.POST)
+//    @RequestMapping(value = "/orders/{mno}/update/{id}", method = RequestMethod.POST)
+    @PutMapping("/{mno}/{id}")
     public ResponseData modifyFinish(@PathVariable("mno") String mno, @PathVariable("id") Integer id) {
         if (mno == null && id == 0) {
             System.out.println("请确认数据是否传递正确");
-            return ResponseData.error(404, "传递了空值，请检查", 0);
+            return ResponseData.error(20030, "传递了空值，请检查", false);
         } else {
 //            设置值
             Orders orders = new Orders();
@@ -66,37 +97,10 @@ public class WorkerController {
             int total = ordersService.updateStatusAndMnoAndIdInt(orders);
             if (total > 0) {
                 System.out.println("更新成功");
-                return ResponseData.success(200, "更新成功", 1);
+                return ResponseData.success(20031, "更新成功", true);
             } else {
-                return ResponseData.error(404,"无法更新该资源,请尝试联系管理员",0);
+                return ResponseData.error(20030,"无法更新该资源,请尝试联系管理员",false);
             }
-        }
-    }
-
-    // 列出所有正在进行的工单
-    @RequestMapping(value = "/orders/{mno}/working", method = RequestMethod.GET)
-    public ResponseData working(@PathVariable("mno") String mno) {
-        noParam.setMno(mno);
-        List<Orders> list = ordersService.finAllFixingOrderByNo(noParam);
-        if (list != null) {
-            return ResponseData.success(200,"获取资源成功",list);
-        } else {
-            return ResponseData.error(200,"没有正在处理的工单",0);
-        }
-    }
-
-    // 列出所有正在进行的工单的详细信息
-    @RequestMapping(value = "/orders/{mno}/working/{id}/details", method = RequestMethod.GET)
-    public ResponseData showDetail(@RequestBody NoParam noParam) {
-//        noParam.setSno(sno);
-//        noParam.setMno(mno);
-//        noParam.setId(id);
-        System.out.println("获取详细");
-        Orders ordersDetails = ordersService.getStudentAddressById(noParam);
-        if (ordersDetails != null) {
-            return ResponseData.success(200, "获取信息成功", ordersDetails);
-        } else {
-            return ResponseData.error(404, "获取失败，请联系管理员", null);
         }
     }
 

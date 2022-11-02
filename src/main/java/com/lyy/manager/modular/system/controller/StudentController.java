@@ -23,13 +23,11 @@ import java.util.List;
  * @since 2022-10-26
  */
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/student/orders")
 public class StudentController {
 
     @Resource
     private StudentService studentService;
-    @Resource
-    private FeedbackService feedbackService;
     @Resource
     private OrdersService ordersService;
     NoParam noParam = new NoParam();
@@ -51,7 +49,8 @@ public class StudentController {
 
 
     //    查询所有工单记录
-    @RequestMapping(value = "/orders/{sno}/all", method = RequestMethod.GET)
+//    @RequestMapping(value = "/orders/{sno}/all", method = RequestMethod.GET)
+    @GetMapping("/{sno}")
     public ResponseData order(@PathVariable("sno") String sno) {
 //        try {
 //            Student studentFindAllOrders = studentService.studentFindAllOrders(sno);
@@ -66,58 +65,59 @@ public class StudentController {
         List<Orders> list = ordersService.findAllAnyOrdersByNo(noParam);
         if (list != null) {
             System.out.println("查询成功");
-            return ResponseData.success(200, "数据查询成功", list);
+            return ResponseData.success(20041, "数据查询成功", list);
         } else {
             System.out.println("没有对应的数据");
-            return ResponseData.error(404, "找不到对应数据", 0);
+            return ResponseData.error(20040, "找不到对应数据", null);
         }
 
     }
 
     //    查询已派单
-    @GetMapping(value = "/orders/{sno}/working")
+    @GetMapping(value = "/{sno}/working")
     public ResponseData ordersWorking(@PathVariable("sno") String sno) {
         noParam.setSno(sno);    //设置学号
         List<Orders> list = ordersService.finAllFixingOrderByNo(noParam);
         if (list != null) {
-            return ResponseData.success(200, "请求成功", list);
+            return ResponseData.success(20041, "请求成功", list);
         } else {
-            return ResponseData.error(404, "添加失败", 0);
+            return ResponseData.error(20040, "数据查询失败，请重试!", null);
         }
     }
 
     //    查询待处理
-    @GetMapping(value = "/orders/{sno}/wait")
+    @GetMapping(value = "/{sno}/wait")
     public ResponseData ordersWait(@PathVariable("sno") String sno) {
         noParam.setSno(sno);    //设置学号
         List<Orders> list = ordersService.finAllWaitForOrderByNo(noParam);
         if (list != null) {
-            return ResponseData.success(200, "请求成功", list);
+            return ResponseData.success(20041, "数据查询成功", list);
         } else {
-            return ResponseData.error(404, "添加失败", 0);
+            return ResponseData.error(20040, "数据查询失败，请重试!", null);
         }
     }
 
-    @GetMapping(value = "/orders/{sno}/finished")
+//    查询完成的工单
+    @GetMapping(value = "/{sno}/finished")
     public ResponseData ordersFinished(@PathVariable("sno") String sno) {
         noParam.setSno(sno);    //设置学号
         List<Orders> list = ordersService.finAllFinishOrderByNo(noParam);
         if (list != null) {
-            return ResponseData.success(200, "请求成功", list);
+            return ResponseData.success(20041, "数据查询成功", list);
         } else {
-            return ResponseData.error(404, "添加失败", 0);
+            return ResponseData.error(20040, "数据查询失败，请重试!", null);
         }
     }
 
 
     //-------------------------------
     //    添加
-    @PostMapping(value = "/orders/{sno}/create")
+    @PostMapping(value = "/{sno}")
     public ResponseData ordersCreate(@RequestBody OrdersParam ordersParam) {
         if (studentService.addOrderByStudentNo(ordersParam) > 0) {
-            return ResponseData.success(200, "请求成功", 1);
+            return ResponseData.success(20011, "添加成功",true);
         } else {
-            return ResponseData.error(404, "添加失败", null);
+            return ResponseData.error(20010, "添加失败", false);
         }
     }
 
@@ -133,43 +133,18 @@ public class StudentController {
 //    }
 
     //    删除某个工单
-    @RequestMapping(value = "/orders/{sno}/del/{id}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/orders/{sno}/del/{id}", method = RequestMethod.GET)
+    @DeleteMapping("/{sno}/{id}")
     public ResponseData del(@PathVariable("sno") String sno, @PathVariable("id") Integer id) {
         OrdersParam ordersParam = new OrdersParam();
         ordersParam.setSno(sno);
         ordersParam.setId(id);
         if (studentService.delOrderByStudentSnoAndOrderId(ordersParam) > 0) {
-            return ResponseData.success(200, "删除成功", 1);
+            return ResponseData.success(20021, "删除成功", true);
         } else {
-            return ResponseData.error(404, "请求资源不存在", 0);
+            return ResponseData.error(20020, "删除失败", false);
         }
     }
 
-    //    学生查看反馈信息
-    @RequestMapping(value = "/feedback/{sno}", method = RequestMethod.GET)
-    public ResponseData feedback(@PathVariable("sno") String sno) {
-        List<Feedback> list = feedbackService.findAllByFsno(sno);
-        if (list != null) {
-            System.out.println("数据获取成功");
-            list.forEach(System.out::println);
-            return ResponseData.success(200, "获取数据成功", list);
-        } else {
-//            找不到资源
-            System.out.println("没有反馈内容，如有问题，请联系管理员");
-            return ResponseData.success(404, "找不到该学生的反馈", 0);
-        }
-    }
-
-    //    学生创建反馈信息   返回非空即添加成功
-    @RequestMapping(value = "/feedback/add/{sno}", method = RequestMethod.POST)
-    public ResponseData createFeedback(@RequestBody Feedback feedback, @PathVariable("sno") String sno) {
-//        获取sno学号
-        feedback.setFsno(sno);
-        int total = feedbackService.addFeedback(feedback);
-        if (total > 0) {
-            return ResponseData.success(200, "添加成功", total);
-        }
-        return ResponseData.error(404, "添加失败", 0);
-    }
 }
 
