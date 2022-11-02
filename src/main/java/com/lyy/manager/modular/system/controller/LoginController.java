@@ -1,6 +1,7 @@
 package com.lyy.manager.modular.system.controller;
 
 import com.lyy.manager.framework.respone.ResponseData;
+import com.lyy.manager.framework.utils.security.jwt.JwtUtil;
 import com.lyy.manager.modular.system.entity.Admin;
 import com.lyy.manager.modular.system.entity.Student;
 import com.lyy.manager.modular.system.entity.Worker;
@@ -42,7 +43,7 @@ public class LoginController {
             return ResponseData.success(200, "登录成功", admin);
         }
         System.out.println("登录失败");
-        return ResponseData.error(500, "登录失败", 0);
+        return ResponseData.error(500, "登录失败", false);
     }
 
     //    登录相关模块
@@ -52,7 +53,7 @@ public class LoginController {
         if (student != null) {
             return ResponseData.success(200, "成功", student);
         }
-        return ResponseData.error(500, "学号或密码错误", 0);
+        return ResponseData.error(500, "学号或密码错误", false);
     }
 
     //    师傅登录
@@ -65,7 +66,7 @@ public class LoginController {
             return ResponseData.success(200,"登录成功",worker);
         }
         System.out.println("登录失败");
-        return ResponseData.error(500,"登录失败",0);
+        return ResponseData.error(500,"登录失败",false);
     }
 
 }
