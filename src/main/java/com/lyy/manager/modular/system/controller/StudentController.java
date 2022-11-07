@@ -40,7 +40,10 @@ public class StudentController {
     NoParam noParam = new NoParam();
 
     //    拼接图片最终渲染路径   http://localhost/images/test1.jpg
-    public String hostPath = "http://localhost/images/";
+//    本地测试路径
+//    public String hostPath = "http://localhost/images/";
+//    远程路径
+    public String hostPath = "http://leeyangy.xyz:8080/images/";
     //    restful风格           sno
     //查询所有工单记录
 //    @RequestMapping(value = "/orders/{sno}/all", method = RequestMethod.GET)
