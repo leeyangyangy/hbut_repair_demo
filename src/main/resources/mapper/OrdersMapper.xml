@@ -106,14 +106,14 @@
         <include refid="dynamicSql"></include>
     </delete>
 
-    <!--    管理员和维修师傅共用更新模块-->
+    <!--    学生，管理员和维修师傅共用更新模块-->
     <update id="updateStatusAndMnoAndIdInt" parameterType="com.lyy.manager.modular.system.entity.Orders">
         update orders
         <trim prefix="set" suffixOverrides=",">
             <if test="mno!=null">
                 mno=#{mno},
             </if>
-            <if test="variety!=variety">
+            <if test="variety!=null">
                 variety=#{variety},
             </if>
             <if test="status!=null">
