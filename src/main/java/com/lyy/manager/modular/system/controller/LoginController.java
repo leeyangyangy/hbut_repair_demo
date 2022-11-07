@@ -12,6 +12,7 @@ import com.lyy.manager.modular.system.param.LoginParam;
 import com.lyy.manager.modular.system.service.AdminService;
 import com.lyy.manager.modular.system.service.StudentService;
 import com.lyy.manager.modular.system.service.WorkerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @Create: 2022/10/29 2:34
  * @Description: 登录控制器
  */
+@Slf4j
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -91,20 +93,26 @@ public class LoginController {
     //    师傅登录
     @PostMapping("/worker")
     public ResponseData worker(@RequestBody LoginParam loginParam, HttpServletResponse response) {
-        System.out.println("---- 管理员登录 ----");
+        System.out.println("---- 维修师傅登录 ----");
         Worker worker = workerService.workLogin(loginParam);
         if (worker != null) {
-            System.out.println("登录成功");
+//            System.out.println("登录成功");
             //            创建token
+//            log.info("101行");
             info.setAccount(worker.getMno());
             info.setName(worker.getName());
+//            log.info("104行");
+            System.out.println("师傅工号="+worker.getMno());
 //            主要是判断id是否被篡改了
             info.setId(Long.valueOf(worker.getMno()));
+//            log.info("107行");
             //拼接redisKey
             String redisKey = RedisConstant.LOGIN_TOKEN_KEY + info.getId();
             //login_token:123
             redisCache.setCache(redisKey, info, RedisConstant.LOGIN_TOKEN_INVALID_TIME, TimeUnit.DAYS);
+//            log.info("测试 109行");
             response.setHeader("Authorization", JwtUtils.createToken(info.getId()));
+//            log.info("测试 111行");
             return ResponseData.success(200, "登录成功", worker);
         }
         System.out.println("登录失败");

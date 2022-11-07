@@ -32,7 +32,7 @@
     <!--    师傅登录-->
     <select id="workLogin" resultType="com.lyy.manager.modular.system.entity.Worker"
             parameterType="com.lyy.manager.modular.system.param.LoginParam">
-        select w.username, w.password, w.tel
+        select w.mno, w.username, w.password, w.tel
         from worker w
         where username = #{username}
           and password = #{password}
