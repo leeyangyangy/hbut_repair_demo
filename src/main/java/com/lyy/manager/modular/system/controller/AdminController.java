@@ -51,8 +51,10 @@ public class AdminController {
         Map<String, Worker> workerList = workerService.findAllWorker();
         if (ordersList != null && workerList != null) {
             Map<String,Object> map=new HashMap<>();
-            map.put("工单",ordersList);
-            map.put("师傅",workerList);
+//            worker  获取维修师傅信息
+            map.put("worker",workerList);
+//            获取所有工单
+            map.put("orders",ordersList);
             return ResponseData.success(20041, "数据获取成功",map);
         } else {
             return ResponseData.error(20040, "查询失败,请重试!", null);
