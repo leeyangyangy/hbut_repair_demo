@@ -157,9 +157,17 @@
                s.tel
         from orders o,
              student s
-        where o.id = #{id}
-          and o.mno = #{mno}
-          and s.sno = #{sno}
+        <where>
+            <if test="sno!=null">
+                and o.sno=#{sno}
+            </if>
+            <if test="mno!=null">
+                and o.mno=#{mno}
+            </if>
+            <if test="id!=null">
+                and o.id=#{id}
+            </if>
+        </where>
     </select>
 
 </mapper>
