@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -20,16 +22,15 @@ public class FileUploadUtils {
 
     /**
      * if (!headerImg.isEmpty()) {
-     *             //保存文件到服务器
-     *             String originalFilename = headerImg.getOriginalFilename();
-     *             try {
-     *                              保存文件
-     *                 fileUpload.transferTo(new File( path+filename ));
-     *             } catch (IOException e) {
-     *                 e.printStackTrace();
-     *             }
-     *         }
-     *
+     * //保存文件到服务器
+     * String originalFilename = headerImg.getOriginalFilename();
+     * try {
+     * 保存文件
+     * fileUpload.transferTo(new File( path+filename ));
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }
+     * }
      */
     //指定本地文件夹存储图片，写到需要保存的目录下
     @Value("${spring.filePath}")
@@ -39,6 +40,7 @@ public class FileUploadUtils {
     public String upload(MultipartFile fileUpload) {
         //获取文件名
         String fileName = fileUpload.getOriginalFilename();
+        System.out.println("原始名" + fileUpload.getOriginalFilename());
         System.out.println("fileName=" + fileName);
 //        非空判断
         if (ObjectUtil.isNotEmpty(fileName)) {
@@ -67,9 +69,9 @@ public class FileUploadUtils {
     //    多文件上传工具类
     public String uploads(MultipartFile[] fileUpload) {
 //        非空判断
-        if(fileUpload.length>0){
+        if (fileUpload.length > 0) {
 //            遍历文件
-            for (MultipartFile multipartFile:fileUpload){
+            for (MultipartFile multipartFile : fileUpload) {
 //                获取原始文件名
                 String fileName = multipartFile.getOriginalFilename();
                 //获取文件后缀名
@@ -83,14 +85,58 @@ public class FileUploadUtils {
                     multipartFile.transferTo(new File(filePath + fileName));
 
 //                    抛异常
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     return null;
                 }
             }
-        }else {
+        } else {
             return null;
         }
         return "上传成功";
     }
+
+    /**
+     * 参数解释:
+     * @param file64 原始字符串
+     *               prefix
+     * @return String
+     */
+    public String uploadBase64(String file64) {
+//        获取文件头 分割  data:image/png;
+//        fileName 拼接上传后的文件名
+        String fileName = "";
+        fileName = String.valueOf(UUID.randomUUID());
+        System.out.println("生成原始uuid" + fileName);
+//        去-
+        fileName = fileName.replace("-", "");
+//        prefix是处理过的字符串,被解码
+        String prefixName = file64.substring(file64.lastIndexOf(",") + 1);
+        System.out.println("处理过后的prefix=\n" + prefixName);
+        //        base64转字节流
+        byte[] fileBytes = Base64Utils.decode(prefixName);
+//         获取文件后缀
+//        去尾部
+        String suffixName = file64.substring(0, file64.indexOf(","));
+        suffixName = suffixName.substring(suffixName.lastIndexOf("/"));
+//        把 / 替换成 .
+        suffixName = suffixName.replace("/", ".");
+//        去 ;
+        suffixName=suffixName.substring(0,suffixName.indexOf(";"));
+//        拼接文件名
+        fileName = fileName + suffixName;
+        System.out.println(suffixName);
+        System.out.println(fileName);
+        try {
+//            拼接路径和文件名
+            FileOutputStream fileOuputStream = new FileOutputStream(filePath+fileName);
+            fileOuputStream.write(fileBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("上传文件失败");
+            return null;
+        }
+        return fileName;
+    }
+
 }
