@@ -3,6 +3,7 @@ package com.lyy.manager.modular.system.param;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Package: com.lyy.manager.modular.system.param
@@ -16,7 +17,6 @@ public class OrdersParam {
     /**
      * 工单id号
      */
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -48,4 +48,9 @@ public class OrdersParam {
      * 工单状态
      */
     private String status;
+
+    /**
+     * 工单状态
+     */
+    private MultipartFile file;
 }
