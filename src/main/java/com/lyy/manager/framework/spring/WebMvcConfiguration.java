@@ -51,9 +51,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
 
 //    注册拦截器
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthenticationUserId())
-                .addPathPatterns("/student/**");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new AuthenticationUserId())
+//                .addPathPatterns("/student/**");
+//    }
 }
