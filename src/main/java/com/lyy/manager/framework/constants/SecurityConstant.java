@@ -10,6 +10,7 @@ public interface SecurityConstant {
 
     String[] SECURITY_URL = {
 
-            "/login/**"
+            "/login/**",
+            "/images/**"
     };
 }
