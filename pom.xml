@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.lyy</groupId>
     <artifactId>hbut_repair</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.22</version>
     <name>manager</name>
     <description>manager</description>
     <properties>
