@@ -65,8 +65,18 @@
     <select id="finAllFinishOrderByNo" resultMap="ordersBaseMap"
             parameterType="com.lyy.manager.modular.system.param.NoParam">
         <include refid="baseSql"></include>
-        <include refid="dynamicSql"></include>
-        and `status` = '2'
+        <where>
+            <if test="sno!=null">
+                and o.sno=#{sno}
+            </if>
+            <if test="mno!=null">
+                and o.mno=#{mno}
+            </if>
+            <if test="id!=null">
+                and o.id=#{id}
+            </if>
+        </where>
+        and o.status = '2'
     </select>
 
     <!--
@@ -75,8 +85,18 @@
     <select id="finAllFixingOrderByNo" resultMap="ordersBaseMap"
             parameterType="com.lyy.manager.modular.system.param.NoParam">
         <include refid="baseSql"></include>
-        <include refid="dynamicSql"></include>
-        and `status` = '1'
+        <where>
+            <if test="sno!=null">
+                and o.sno=#{sno}
+            </if>
+            <if test="mno!=null">
+                and o.mno=#{mno}
+            </if>
+            <if test="id!=null">
+                and o.id=#{id}
+            </if>
+        </where>
+        and o.status = '1'
     </select>
 
     <!--
@@ -85,15 +105,35 @@
     <select id="finAllWaitForOrderByNo" resultMap="ordersBaseMap"
             parameterType="com.lyy.manager.modular.system.param.NoParam">
         <include refid="baseSql"></include>
-        <include refid="dynamicSql"></include>
-        and `status` = '0'
+        <where>
+            <if test="sno!=null">
+                and o.sno=#{sno}
+            </if>
+            <if test="mno!=null">
+                and o.mno=#{mno}
+            </if>
+            <if test="id!=null">
+                and o.id=#{id}
+            </if>
+        </where>
+        and o.status = '0'
     </select>
 
     <!--    用户查询属于自己的所有状态的工单-->
     <select id="findAllAnyOrdersByNo" resultMap="ordersBaseMap"
             parameterType="com.lyy.manager.modular.system.param.NoParam">
         <include refid="baseSql"></include>
-        <include refid="dynamicSql"></include>
+        <where>
+            <if test="sno!=null">
+                and o.sno=#{sno}
+            </if>
+            <if test="mno!=null">
+                and o.mno=#{mno}
+            </if>
+            <if test="id!=null">
+                and o.id=#{id}
+            </if>
+        </where>
     </select>
 
     <!--
