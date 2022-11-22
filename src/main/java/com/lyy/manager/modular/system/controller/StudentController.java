@@ -1,18 +1,21 @@
 package com.lyy.manager.modular.system.controller;
 
 
+import cn.hutool.core.codec.Base64;
 import com.lyy.manager.framework.respone.ResponseData;
 import com.lyy.manager.modular.basic.util.FileUploadUtils;
-import com.lyy.manager.modular.system.entity.Feedback;
+
 import com.lyy.manager.modular.system.entity.Orders;
 import com.lyy.manager.modular.system.param.NoParam;
 import com.lyy.manager.modular.system.param.OrdersParam;
-import com.lyy.manager.modular.system.service.FeedbackService;
+
 import com.lyy.manager.modular.system.service.OrdersService;
 import com.lyy.manager.modular.system.service.StudentService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -37,7 +40,7 @@ public class StudentController {
     @Autowired
     private FileUploadUtils fileUploadUtils;
 
-    NoParam noParam = new NoParam();
+
 
     //    拼接图片最终渲染路径   http://localhost/images/test1.jpg
 //    本地测试路径
@@ -45,34 +48,12 @@ public class StudentController {
 //    远程路径
     public String hostPath = "http://leeyangy.xyz:8080/images/";
     //    restful风格           sno
-    //查询所有工单记录
-//    @RequestMapping(value = "/orders/{sno}/all", method = RequestMethod.GET)
-//    public List<Orders> order(@PathVariable("sno") Integer sno) {
-//        try {
-//            Student studentFindAllOrders = studentService.studentFindAllOrders(sno);
-//            List<Orders> list = studentFindAllOrders.getOrdersList();
-//            return list;
-////            return ResponseData.success(200,"数据请求成功",stuOrdersAll.getOrdersList());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-
 
     //    查询所有工单记录
 //    @RequestMapping(value = "/orders/{sno}/all", method = RequestMethod.GET)
     @GetMapping("/{sno}")
     public ResponseData order(@PathVariable("sno") String sno) {
-//        try {
-//            Student studentFindAllOrders = studentService.studentFindAllOrders(sno);
-//            List<Orders> list = studentFindAllOrders.getOrdersList();
-//            return ResponseData.success(studentFindAllOrders);
-////            return ResponseData.success(200,"数据请求成功",stuOrdersAll.getOrdersList());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseData.error(null);
-//        }
+        NoParam noParam = new NoParam();
         noParam.setSno(sno);
         List<Orders> list = ordersService.findAllAnyOrdersByNo(noParam);
         if (list != null) {
@@ -82,12 +63,12 @@ public class StudentController {
             System.out.println("没有对应的数据");
             return ResponseData.error(20040, "找不到对应数据", null);
         }
-
     }
 
     //    查询已派单
     @GetMapping(value = "/{sno}/working")
     public ResponseData ordersWorking(@PathVariable("sno") String sno) {
+        NoParam noParam = new NoParam();
         noParam.setSno(sno);    //设置学号
         List<Orders> list = ordersService.finAllFixingOrderByNo(noParam);
         if (list != null) {
@@ -100,6 +81,7 @@ public class StudentController {
     //    查询待处理
     @GetMapping(value = "/{sno}/wait")
     public ResponseData ordersWait(@PathVariable("sno") String sno) {
+        NoParam noParam = new NoParam();
         noParam.setSno(sno);    //设置学号
         List<Orders> list = ordersService.finAllWaitForOrderByNo(noParam);
         if (list != null) {
@@ -112,6 +94,7 @@ public class StudentController {
     //    查询完成的工单
     @GetMapping(value = "/{sno}/finished")
     public ResponseData ordersFinished(@PathVariable("sno") String sno) {
+        NoParam noParam = new NoParam();
         noParam.setSno(sno);    //设置学号
         List<Orders> list = ordersService.finAllFinishOrderByNo(noParam);
         if (list != null) {
@@ -121,25 +104,19 @@ public class StudentController {
         }
     }
 
-
-    //-------------------------------
     //    添加
-    @PostMapping(value = "/{sno}")
+    @PostMapping("/add")
 //    public ResponseData ordersCreate(@RequestBody OrdersParam ordersParam) {
-    public ResponseData create(@PathVariable("sno") String sno,
-                               @RequestParam("variety") String variety,
-                               @RequestParam("detail") String detail,
-                               @RequestPart MultipartFile picture) {
-        System.out.println(picture);
-        OrdersParam ordersParam = new OrdersParam();
-//        ordersParam.set
-        ordersParam.setSno(sno);
-        ordersParam.setVariety(variety);
-        ordersParam.setDetail(detail);
+    public ResponseData ordersCreate(OrdersParam ordersParam) {
         System.out.println(ordersParam);
-        String newFilename = fileUploadUtils.upload(picture);
-        if (newFilename == null) System.out.println("文件错误");
-        ordersParam.setPicture(hostPath + newFilename);
+        if (ordersParam.getFile64() == null) {
+            System.out.println("文件上传为空");
+        } else {
+            String neeFileName = fileUploadUtils.uploadBase64(ordersParam.getFile64());
+            if (neeFileName == null) System.out.println("文件错误");
+            ordersParam.setPicture(hostPath + neeFileName);
+        }
+//        io流上传文件
 //        MultipartFile fileUpload;
 //        fileUpload.getOriginalFilename()
 //        String fileName = fileUploadUtils.upload();
@@ -151,19 +128,7 @@ public class StudentController {
         }
     }
 
-    //    删除
-//    @Transient
-//    @RequestMapping(value = "/orders/{sno}/del/{id}", method = RequestMethod.GET)
-//    public ResponseData del(@RequestBody OrdersParam ordersParam) {
-//        if (studentService.delOrderByStudentSnoAndOrderId(ordersParam) > 0) {
-//            return ResponseData.success(200, "删除成功", null);
-//        } else {
-//            return ResponseData.error(404, "请求资源不存在", null);
-//        }
-//    }
-
     //    删除某个工单
-//    @RequestMapping(value = "/orders/{sno}/del/{id}", method = RequestMethod.GET)
     @DeleteMapping("/{sno}/{id}")
     public ResponseData del(@PathVariable("sno") String sno, @PathVariable("id") Integer id) {
         OrdersParam ordersParam = new OrdersParam();
@@ -179,22 +144,27 @@ public class StudentController {
     //-------------------------------
     //    修改
     @PutMapping(value = "/{sno}/{id}")
-//    public ResponseData ordersCreate(@RequestBody OrdersParam ordersParam) {
-    public ResponseData update(@PathVariable("sno") String sno,
-                               @PathVariable("id") Integer id,
-                               @RequestParam("variety") String variety,
-                               @RequestParam("detail") String detail,
-                               @RequestPart MultipartFile picture) {
-//        ordersParam.set
+    public ResponseData update(@RequestBody OrdersParam ordersParam,
+                               @PathVariable("sno") String sno,
+                               @PathVariable("id") Integer id ) {
+//        为null则不需要修改图片
+        if (ordersParam.getFile64() == null) {
+            System.out.println("文件上传为空");
+        } else {
+            String newFileName = fileUploadUtils.uploadBase64(ordersParam.getFile64());
+            if (newFileName == null) System.out.println("文件错误");
+            ordersParam.setPicture(hostPath + newFileName);
+        }
+
+        //        ordersParam.set
         Orders orders = new Orders();
         orders.setId(id);
         orders.setSno(sno);
-        orders.setVariety(variety);
-        orders.setDetail(detail);
+        orders.setVariety(ordersParam.getVariety());
+        orders.setDetail(ordersParam.getDetail());
+        orders.setPicture(orders.getPicture());
         System.out.println(orders);
-        String newFilename = fileUploadUtils.upload(picture);
-        if (newFilename == null) System.out.println("文件错误");
-        orders.setPicture(hostPath + newFilename);
+//        total  判断
         int total = ordersService.updateStatusAndMnoAndIdInt(orders);
         if (total > 0) {
             System.out.println("修改成功");
@@ -204,5 +174,23 @@ public class StudentController {
             return ResponseData.error(20030, "修改失败", false);
         }
     }
+
+    //    查看某个详细工单
+    @GetMapping("/{sno}/{id}")
+    public ResponseData showDetail(@PathVariable("sno") String sno,
+                                   @PathVariable("id") Integer id) {
+        System.out.println("请求参数"+sno+"   "+id);
+        System.out.println("获取详细");
+        NoParam noParam = new NoParam();
+        noParam.setId(id);
+        noParam.setSno(sno);
+        Orders ordersDetails = ordersService.getStudentAddressById(noParam);
+        if (ordersDetails != null) {
+            return ResponseData.success(20041, "数据查询成功!", ordersDetails);
+        } else {
+            return ResponseData.error(20040, "获取失败，请联系管理员", null);
+        }
+    }
+
 }
 

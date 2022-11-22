@@ -75,21 +75,21 @@
     <select id="studentFindAllNeedFixOrder" parameterType="String" resultMap="studentOrdersMap">
         <include refid="baseSql"></include>
         AND s.sno =#{sno}
-        AND o.status='待接单';
+        AND o.status='0';
     </select>
 
     <!--    工单查询 ==根据sno学号查询 正在维修的工单-->
     <select id="studentFindAllFixingOrder" parameterType="String" resultMap="studentOrdersMap">
         <include refid="baseSql"></include>
         AND s.sno = #{sno}
-        AND o.status = '正在处理';
+        AND o.status = '1';
     </select>
 
     <!--    工单完成状态查询 ==已完成-->
     <select id="studentFindAllFinishOrder" parameterType="String" resultMap="studentOrdersMap">
         <include refid="baseSql"></include>
         AND s.sno = #{sno}
-        AND o.status = '已完成';
+        AND o.status = '2';
     </select>
 
     <!--    工单创建   通过学生学号进行插入  学生学号做了外键约束-->
