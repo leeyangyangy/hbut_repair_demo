@@ -50,7 +50,12 @@ public class OrdersParam {
     private String status;
 
     /**
-     * 工单状态
+     * 文件流文件
      */
     private MultipartFile file;
+
+    /**
+     * base64文件
+     */
+    private String file64;
 }
