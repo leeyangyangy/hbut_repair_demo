@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyt.manager.modular.system.mapper.ProductMapper">
+    <resultMap id="baseMap" type="Product">
+        <id property="id" column="id"/>
+        <result property="productSupplier" column="product_supplier"/>
+        <result property="productName" column="product_name"/>
+        <result property="productProfile" column="product_profile"/>
+        <result property="productPicture" column="product_picture"/>
+        <result property="productClassify" column="product_classify"/>
+        <result property="productType" column="product_type"/>
+        <result property="productValue" column="product_value"/>
+        <result property="productPrice" column="product_price"/>
+        <result property="productUnits" column="product_units"/>
+        <result property="productWarn" column="product_warn"/>
+        <result property="productStatus" column="product_status"/>
+        <result property="productOperator" column="product_operator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+</mapper>
