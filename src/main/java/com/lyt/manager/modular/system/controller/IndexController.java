@@ -15,19 +15,18 @@ import java.util.List;
 //@RequestMapping
 public class IndexController {
 
-//    @Resource
-//    private UserService userService;
-
-//    @Resource
-//    private PermissionService permissionService;
+    /**
+     * 参数选型
+     * 1.HttpServletRequest    只有通过转发方式到达目标页面就结束
+     * 2.HttpSession           所有(多个)页面都需要用到的数据
+     * 3.ServletContext        所有用户共享数据   数据一直在内存中，服务器重启才消失
+     * 4.ModelAndView          方法返回值是ModelAndView
+     * 5.Model                 只有通过转发方式到达目标页面就结束
+     */
 
     @GetMapping
     public String index(HttpServletRequest request){
         System.out.println("---- 进入首页控制器 ----");
-//        List<Permission> permissionList = permissionService.findAll();
-//        request.setAttribute("permissionList", permissionList);
-//        for (Permission permission:permissionList)
-//            System.out.println(permission);
         return "login";
     }
 }
