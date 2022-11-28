@@ -17,5 +17,6 @@
         <result property="productOperator" column="product_operator"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="deliverTime" column="deliver_time"/>
     </resultMap>
 </mapper>

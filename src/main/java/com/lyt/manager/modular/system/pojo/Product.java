@@ -1,6 +1,8 @@
 package com.lyt.manager.modular.system.pojo;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.lyt.manager.framework.pojo.base.BaseTimeEntity;
@@ -87,5 +89,8 @@ public class Product extends BaseTimeEntity {
      */
     private String productOperator;
 
-
+    /**
+     * 出库时间
+     */
+    private Date deliverTime;
 }

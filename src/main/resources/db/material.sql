@@ -23,7 +23,8 @@ CREATE TABLE t_product(
                           product_supplier VARCHAR(10) DEFAULT NULL COMMENT "产品供应商",
                           product_operator VARCHAR(200) NOT NULL COMMENT "操作人",
                           create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                          update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+                          update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                          create_time DATETIME DEFAULT NULL COMMENT '出库时间',
 );
 
 -- 产品种(大)类
