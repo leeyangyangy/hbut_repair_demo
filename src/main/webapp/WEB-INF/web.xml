@@ -48,20 +48,20 @@
     </listener>
 
     <!--    配置代理过滤器，将部门注入到login.jsp-->
-    <!--    filter-name配置被代理过滤器bean的id-->
-<!--    <filter>-->
-<!--        <filter-name>departFilter</filter-name>-->
-<!--        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-<!--        <init-param>-->
-<!--            <param-name>targetFilterLifecycle</param-name>-->
-<!--            <param-value>true</param-value>-->
-<!--        </init-param>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>departFilter</filter-name>-->
-<!--        <url-pattern>/login.jsp</url-pattern>-->
-<!--        <url-pattern>/user/login</url-pattern>-->
-<!--        <url-pattern>/adduser.jsp</url-pattern>-->
-<!--        <url-pattern>/</url-pattern>-->
-<!--    </filter-mapping>-->
+<!--        filter-name配置被代理过滤器bean的id-->
+    <filter>
+        <filter-name>permissionFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>permissionFilter</filter-name>
+        <url-pattern>/login.jsp</url-pattern>
+        <url-pattern>/user/login</url-pattern>
+        <url-pattern>/adduser.jsp</url-pattern>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
 </web-app>
