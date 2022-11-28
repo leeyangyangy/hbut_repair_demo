@@ -32,6 +32,15 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    /**
+     * 参数选型
+     * 1.HttpServletRequest    只有通过转发方式到达目标页面就结束
+     * 2.HttpSession           所有(多个)页面都需要用到的数据
+     * 3.ServletContext        所有用户共享数据   数据一直在内存中，服务器重启才消失
+     * 4.ModelAndView          方法返回值是ModelAndView
+     * 5.Model                 只有通过转发方式到达目标页面就结束
+     */
+
     //    用户登录
     @PostMapping("/login")
     public String login(User user, HttpServletRequest request, HttpSession session) {
@@ -39,8 +48,10 @@ public class UserController {
         System.out.println("打印user数据" + user);
 //        执行登录
         User login = userService.login(user);
+        System.out.println(login);
         if (login != null) {
             session.setAttribute("login", login);
+//            return "redirect:main";
             return "main";
         } else {
             request.setAttribute("msg", "账号密码错误,部门信息错误");
@@ -48,6 +59,13 @@ public class UserController {
         }
     }
 
+//    注销登录
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+//        使session失效
+        session.invalidate();
+        return "redirect:login";
+    }
 
 }
 
