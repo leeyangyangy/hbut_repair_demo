@@ -151,6 +151,33 @@
       <scope>compile</scope>
     </dependency>
 
+    <!-- 添加 模板引擎 依赖 -->
+    <!--mp代码生成器-->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-generator</artifactId>
+      <version>3.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.velocity</groupId>
+      <artifactId>velocity-engine-core</artifactId>
+      <version>2.2</version>
+    </dependency>
+
+    <!--huTool-->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.5.8</version>
+    </dependency>
+
+    <!--fastJson-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.79</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>materials</finalName>
