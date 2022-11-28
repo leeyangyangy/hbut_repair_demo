@@ -1,8 +1,12 @@
 package com.lyt.manager.modular.system.controller;
 
 
+import com.lyt.manager.modular.system.pojo.Permission;
 import com.lyt.manager.modular.system.pojo.User;
+import com.lyt.manager.modular.system.service.PermissionService;
 import com.lyt.manager.modular.system.service.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>
@@ -20,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author lyy
  * @since 2022-11-28
  */
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
@@ -38,7 +43,7 @@ public class UserController {
             session.setAttribute("login", login);
             return "main";
         } else {
-            request.setAttribute("msg", "账号密码错误");
+            request.setAttribute("msg", "账号密码错误,部门信息错误");
             return "login";
         }
     }

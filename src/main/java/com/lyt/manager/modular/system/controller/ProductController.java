@@ -1,6 +1,7 @@
 package com.lyt.manager.modular.system.controller;
 
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lyy
  * @since 2022-11-28
  */
-@RestController
+@Controller
 @RequestMapping("/product")
 public class ProductController {
 
