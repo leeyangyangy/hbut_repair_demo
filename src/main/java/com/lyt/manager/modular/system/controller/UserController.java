@@ -58,13 +58,12 @@ public class UserController {
             return "login";
         }
     }
-
 //    注销登录
     @RequestMapping("/logout")
     public String logout(HttpSession session){
 //        使session失效
         session.invalidate();
-        return "redirect:login";
+        return "redirect:/";
     }
 
 }
