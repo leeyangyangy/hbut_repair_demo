@@ -13,7 +13,7 @@
     <!--    <context:component-scan base-package="xyz.leeyangy.service.impl"/>-->
     <context:component-scan base-package="com.lyt.manager.modular.system.mapper"/>
     <!-- Service包(自动注入) -->
-<!--    <context:component-scan base-package="com.**.service"/>-->
+    <!--    <context:component-scan base-package="com.**.service"/>-->
     <context:component-scan base-package="com.lyt.manager.modular.system.service"/>
     <!--引入db.properteis文件-->
     <context:property-placeholder location="classpath:db/db.properties"/>
