@@ -1,6 +1,7 @@
 package com.lyt.manager.modular.system.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.lyt.manager.framework.pojo.base.BaseTimeEntity;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class User extends BaseTimeEntity {
     /**
      * 登录用户密码
      */
+    @TableField(select = false)
     private String password;
 
     /**
