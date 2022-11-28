@@ -23,8 +23,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div id="left" style="color:white;font-size:20px;padding-top:5px;">欢迎使用本系统</div>
     	<div id="right">
     		<span>
-    			欢迎<a href="">${customer.cname}</a>&nbsp;&nbsp;
-    			<a href="/logout" target="_top">退出</a>
+    			欢迎<a href="">${login.username}</a>&nbsp;&nbsp;
+    			<a href="/user/logout" target="_top">退出</a>
     		</span>&nbsp;&nbsp;
     		<span id="clock"></span>
     	</div>

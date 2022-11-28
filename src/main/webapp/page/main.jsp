@@ -9,16 +9,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'main.jsp' starting page</title>
+    <title>物料管理系统</title>
     
 
   </head>
   <!-- 页面分帧技术 -->
   <frameset rows="47,*" border="0">
-  	<frame src="top.jsp" scrolling="no">
+  	<frame src="/page/top.jsp" scrolling="no">
   	<frameset cols="190,*">
-  		<frame src="left.jsp" noresize="noresize">
-  		<frame src="welcome.jsp" name="con">
+  		<frame src="/page/left.jsp" noresize="noresize">
+  		<frame src="/page/welcome.jsp" name="con">
   	</frameset>
   </frameset>
 </html>

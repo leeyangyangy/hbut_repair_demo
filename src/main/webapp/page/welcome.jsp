@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="down">
     	<div id="d1">
-    		<span class="s1">热烈欢迎：${customer.cname}</span>
+    		<span class="s1">热烈欢迎：${login.username}</span>
     		<span class="s2">访问本系统！！！</span>
     	</div>
     	<div id="d2"></div>

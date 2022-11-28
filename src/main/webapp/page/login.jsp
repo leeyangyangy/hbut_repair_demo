@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>HTML5响应式用户登录界面模板</title>
+  <title>用户登录</title>
  
   <link rel="stylesheet" media="screen" href="<%=request.getContextPath() %>/css/style.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/reset.css"/>
@@ -21,19 +21,20 @@
 		<div class="login">
 			<div class="login-top">
 				登录
+				<p style="color: red;font-size: 14px">${msg}</p>
 			</div>
-				<form action="<%=request.getContextPath() %>/login" method="post" id="form">
+				<form action="<%=request.getContextPath() %>/user/login" method="post" id="form">
 				<div class="login-center clearfix">
 					<div class="login-center-img"><img src="<%=request.getContextPath() %>/img/name.png"/></div>
 					<div class="login-center-input">
-						<input type="text" name="na" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+						<input type="text" name="userId" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
 						<div class="login-center-input-text">用户名</div>
 					</div>
 				</div>
 				<div class="login-center clearfix">
 					<div class="login-center-img"><img src="<%=request.getContextPath() %>/img/password.png"/></div>
 					<div class="login-center-input">
-						<input type="password" name="pass" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+						<input type="password" name="password" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
 						<div class="login-center-input-text">密码</div>
 					</div>
 				</div>
@@ -41,9 +42,9 @@
 				<div class="login-center clearfix">
 					<div class="login-center-img"><img src="<%=request.getContextPath() %>/img/password.png"/></div>
 					<div class="login-center-input">
-						<select name="did" style="width:200px; background: #13E8E9;">
-							<c:forEach items="${list}" var="dept">
-								<option value="${dept.did}">${dept.role}</option>
+						<select name="permission" style="width:200px; background: #13E8E9;">
+							<c:forEach items="${permissionList}" var="permission">
+								<option value="${permission.id}">${permission.permissionName}</option>
 							</c:forEach>
 						</select>
 						<div class="login-center-input-text">密码</div>

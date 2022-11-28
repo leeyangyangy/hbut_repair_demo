@@ -38,14 +38,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<h3 class="h1"><span>用户管理</span></h3>
     	<ul>
     		<c:if test="${sessionScope.customer.did==1}">
-    			<li><a href="/toAddCustomer" target="con">--用户添加</a></li>
+    			<li><a href="/user/toAddUser" target="con">--用户添加</a></li>
 			</c:if>
     		<li><a href="/getAllCuttomer" target="con">--用户列表</a></li>
     	</ul>
-    	<h3 class="h2"><span>商品管理</span></h3>
+    	<h3 class="h2"><span>物料管理</span></h3>
     	<ul>
-    		<li><a href="jsp/product/add.jsp" target="con">--商品添加</a></li>
-    		<li><a href="jsp/product/list.jsp" target="con">--商品列表</a></li>
+    		<li><a href="jsp/product/add.jsp" target="con">--物料添加</a></li>
+    		<li><a href="jsp/product/list.jsp" target="con">--物料列表</a></li>
     	</ul>
 
     	<h3 class="h4"><span>订单管理</span></h3>
