@@ -85,11 +85,11 @@
     </tx:advice>
 
     <!--    配置切面-->
-    <aop:config>
-        <aop:pointcut id="transactionPointcut"
-                      expression="execution(* com.lyt.manager.modular.system.service..*.*(..))"/>
-        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
-    </aop:config>
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="transactionPointcut"-->
+<!--                      expression="execution(* com.lyt.manager.modular.system.service..*.*(..))"/>-->
+<!--        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>-->
+<!--    </aop:config>-->
 
     <!--配置生产SqlSessionFactory工厂的bean-->
     <bean id="sqlSessionFactory"
@@ -114,10 +114,10 @@
 <!--        </property>-->
     </bean>
 
-<!--    <bean id="configuration" class="com.baomidou.mybatisplus.core.MybatisConfiguration">-->
-<!--        &lt;!&ndash; 需配置该值为false,避免1或2级缓存可能出现问题,该属性会在旧插件移除后一同移除 &ndash;&gt;-->
-<!--        <property name="useDeprecatedExecutor" value="false"/>-->
-<!--    </bean>-->
+    <bean id="configuration" class="com.baomidou.mybatisplus.core.MybatisConfiguration">
+        <!-- 需配置该值为false,避免1或2级缓存可能出现问题,该属性会在旧插件移除后一同移除 -->
+        <property name="useDeprecatedExecutor" value="false"/>
+    </bean>
 
     <bean id="mybatisPlusInterceptor" class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
         <property name="interceptors">
