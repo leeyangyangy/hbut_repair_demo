@@ -15,10 +15,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <!-- 页面分帧技术 -->
   <frameset rows="47,*" border="0">
-  	<frame src="/page/top.jsp" scrolling="no">
+  	<frame src="top.jsp" scrolling="no">
   	<frameset cols="190,*">
-  		<frame src="/page/left.jsp" noresize="noresize">
-  		<frame src="/page/welcome.jsp" name="con">
+  		<frame src="left.jsp" noresize="noresize">
+  		<frame src="welcome.jsp" name="con">
   	</frameset>
   </frameset>
 </html>
