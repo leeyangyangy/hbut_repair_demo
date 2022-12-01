@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<div id="up">
 	   <ul>
-	    	<li><span><a href="admin/welcome">平台首页 </a>&gt; 商品管理 &gt; 商品列表</span></li>
+	    	<li><span><a href="admin/welcome">平台首页 </a>&gt; 用户管理 &gt; 用户列表</span></li>
 	   </ul>
 	</div>
 	<div id="down">
@@ -72,28 +72,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>主键</td>
 					<td>姓名</td>
 					<td>用户账号</td>
-					<td>用户密码</td>
-					<td>关联字段</td>
+					<td>用户状态</td>
+<%--					<td>关联字段</td>--%>
+<%--					<td>角色主键</td>--%>
 					<td>用户角色</td>
 		    		<td>操作</td>
 		    	</tr>
 	    	</thead>
 	    	<tbody>
-				<c:forEach items="${allUser }" var="user" varStatus="status">
+				<c:forEach items="${allUser}" var="user" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
-						<td>${user.cid}</td>
-						<td>${user.cname}</td>
-						<td>${user.password}</td>
-						<td>${user.telephone}</td>
-						<td>${user.did}</td>
-						<td>${user.dept.role}</td>
+						<td>${user.id}</td>
+						<td>${user.username}</td>
+						<td>${user.userId}</td>
+						<td>${user.status}</td>
+<%--						<td>${user.permissionId}</td>--%>
+<%--						<td>${user.permission.id}</td>--%>
+						<td>${user.permission.permissionName}</td>
 			    		<td>
-			    			<a href="/getCustomerById?id=${user.cid}">用户详情</a>&nbsp;
-							<a href="/toUpdateCustomer?id=${user.cid}">修改</a>&nbsp;
+<%--			    			<a href="/getCustomerById?id=${user.userId}">用户详情</a>&nbsp;--%>
+							<a href="/user/toUpdateUser?userId=${user.userId}">修改</a>&nbsp;
 
-							<c:if test="${customer.did==1}">
-								<a href="/deleteCustomer?id=${user.cid}" class="del">删除</a>&nbsp;
+							<c:if test="${user.permissionId>1}">
+								<a href="/user/deleteUserByUserId?userId=${user.userId}" class="del">删除</a>&nbsp;
 							</c:if>
 			    		</td>
 			    	</tr>

@@ -42,7 +42,7 @@
 				<div class="login-center clearfix">
 					<div class="login-center-img"><img src="<%=request.getContextPath() %>/img/password.png"/></div>
 					<div class="login-center-input">
-						<select name="permission" style="width:200px; background: #13E8E9;">
+						<select name="permissionId" style="width:200px; background: #13E8E9;">
 							<c:forEach items="${permissionList}" var="permission">
 								<option value="${permission.id}">${permission.permissionName}</option>
 							</c:forEach>

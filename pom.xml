@@ -7,6 +7,11 @@
     <version>1.0-SNAPSHOT</version>
     <name>materials Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -187,17 +192,5 @@
     </dependencies>
     <build>
         <finalName>materials</finalName>
-        <plugins>
-            <!--   java 编译插件-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-complier-plugin</artifactId>
-                <version>3.6.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 </project>

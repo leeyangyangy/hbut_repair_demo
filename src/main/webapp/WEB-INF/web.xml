@@ -61,7 +61,9 @@
         <filter-name>permissionFilter</filter-name>
         <url-pattern>/login.jsp</url-pattern>
         <url-pattern>/user/login</url-pattern>
-        <url-pattern>/adduser.jsp</url-pattern>
+        <url-pattern>/addUser.jsp</url-pattern>
+<!--        <url-pattern>/userUpdate.jsp</url-pattern>-->
+<!--        <url-pattern>/updateUser.jsp</url-pattern>-->
         <url-pattern>/</url-pattern>
     </filter-mapping>
 </web-app>

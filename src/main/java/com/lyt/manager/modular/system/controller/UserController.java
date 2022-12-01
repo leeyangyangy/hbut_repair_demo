@@ -6,11 +6,7 @@ import com.lyt.manager.modular.system.pojo.User;
 import com.lyt.manager.modular.system.service.PermissionService;
 import com.lyt.manager.modular.system.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +27,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private PermissionService permissionService;
 
     /**
      * 参数选型
@@ -58,13 +57,76 @@ public class UserController {
             return "login";
         }
     }
-//    注销登录
+
+    //    注销登录
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
 //        使session失效
         session.invalidate();
         return "redirect:/";
     }
 
+    //    获取所有用户
+    @GetMapping("/findAllUser")
+    public String findAllUser(HttpServletRequest request) {
+        List<User> allUser = userService.findAllUser();
+        request.setAttribute("allUser", allUser);
+        return "userList";
+    }
+
+    //    修改用户信息
+//    转发到更新页面
+    @GetMapping("/toUpdateUser")
+    public String toUpdateUser(String userId, HttpServletRequest request) {
+        System.out.println(userId);
+        User user = userService.findUserByUserId(userId);
+        System.out.println(user);
+        request.setAttribute("userInfo", user);
+        List<Permission> permissionList = permissionService.findAll();
+        request.setAttribute("permissionList", permissionList);
+        return "updateUser";
+
+    }
+
+//    更新用户表信息
+    @PostMapping("/updateUserByUserId")
+    public String updateUserByUserId(User user) {
+        System.out.println("进入更新控制器");
+        System.out.println(user);
+//        System.out.println(userService.updateById(user));
+        userService.updateUserById(user);
+        //        删除完成，重定向到用户列表
+        return "redirect:findAllUser";
+    }
+
+    //    直接删除
+    @GetMapping("/deleteUserByUserId")
+    public String deleteUser(String userId) {
+        System.out.println(userId);
+        userService.deleteByUserId(userId);
+        //        删除完成，重定向到用户列表
+        return "redirect:findAllUser";
+    }
+
+    //    用户添加
+    @PostMapping("/add")
+    public String add(User user) {
+        System.out.println(user);
+        userService.addUser(user);
+//        添加完成，重定向到用户列表
+        return "redirect:findAllUser";
+    }
+
+    @RequestMapping("/checkUserId")
+    @ResponseBody
+    public Boolean checkUserId(String userId) {
+        System.out.println(userId);
+        User user = userService.findUserByUserId(userId);
+        if (user != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
