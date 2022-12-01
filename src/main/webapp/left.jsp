@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<c:if test="${sessionScope.customer.did==1}">
     			<li><a href="/user/toAddUser" target="con">--用户添加</a></li>
 			</c:if>
-    		<li><a href="/getAllCuttomer" target="con">--用户列表</a></li>
+    		<li><a href="/user/getAllUser" target="con">--用户列表</a></li>
     	</ul>
     	<h3 class="h2"><span>物料管理</span></h3>
     	<ul>

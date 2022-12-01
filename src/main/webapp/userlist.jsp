@@ -70,16 +70,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	<tr class="head">
 		    		<td>序号</td>
 					<td>主键</td>
-					<td>用户名</td>
-					<td>密码</td>
-					<td>电话</td>
+					<td>姓名</td>
+					<td>用户账号</td>
+					<td>用户密码</td>
 					<td>关联字段</td>
 					<td>用户角色</td>
 		    		<td>操作</td>
 		    	</tr>
 	    	</thead>
 	    	<tbody>
-				<c:forEach items="${customerList }" var="user" varStatus="status">
+				<c:forEach items="${allUser }" var="user" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
 						<td>${user.cid}</td>

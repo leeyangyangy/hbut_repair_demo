@@ -46,12 +46,15 @@ public class User extends BaseTimeEntity {
     /**
      * 用户权限
      */
-    private Integer permission;
+    private Integer permissionId;
 
     /**
      * 用户状态
      */
     private String status;
 
-
+    /**
+     * 一对一关联查询
+     */
+    private Permission permission;
 }
