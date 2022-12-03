@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'add.jsp' starting page</title>
+    <title>用户信息更新</title>
    	
    	<link href="<%=request.getContextPath() %>/css/update.css" type="text/css" rel="stylesheet">
 
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 	<div id="up">
 	   <ul>
-	    	<li><span><a href="admin/welcome">平台首页 </a>&gt; 用户管理 &gt; 用户修改</span></li>
+	    	<li><span><a href="javascript:history.go(-1);">平台首页 </a>&gt; 用户管理 &gt; 用户修改</span></li>
 	   </ul>
 	</div>
 	<div id="down">
