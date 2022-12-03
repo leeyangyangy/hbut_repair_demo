@@ -31,20 +31,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input type="hidden" name="id" value="${userInfo.id}"/>
 					<input type="hidden" name="userId" value="${userInfo.userId}"/>
 	   				<td>用户姓名：</td>
-	   				<td><input type="text" name="username" value="${userInfo.username}" class="in"/></td>
+	   				<td><input type="text" placeholder="密码为空，则不修改，如需修改，请填写密码!" name="username" value="${userInfo.username}" class="in"/></td>
 	   			</tr>
 	   			<tr>
 	   				<td>用户密码：</td>
-	   				<td><input type="password" name="password" value="${userInfo.password}" class="in"/></td>
-	   			</tr><span>(不填，则不修改)</span>
-<%--	   			<tr>--%>
-<%--	   				<td>用户年龄：</td>--%>
-<%--	   				<td><input type="text" name="age" value="${user3.age}" class="in"/></td>--%>
-<%--	   			</tr>--%>
-<%--				<tr>--%>
-<%--					<td>用户生日：</td>--%>
-<%--					<td><input type="text" name="birth" value='<fmt:formatDate value="${user3.birthday}" pattern="yyyy-MM-dd"/>' class="in"/></td>--%>
-<%--				</tr>--%>
+	   				<td><input type="password"  name="password" value="${userInfo.password}" class="in"/></td>
+	   			</tr>
 				<tr>
 					<td>用户状态</td>
 					<td>
@@ -53,14 +45,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<option value="冻结">冻结</option>
 							<option value="离职">离职</option>
 							<option value="正常" selected="selected">正常</option>
-<%--							<c:forEach items="${permissionList}" var="p">--%>
-
-<%--								<option value="${p.id}"--%>
-<%--										<c:if test="${userInfo.permissionId==p.id}">--%>
-<%--											selected="selected"--%>
-<%--										</c:if>--%>
-<%--								>${p.permissionName}</option>--%>
-<%--							</c:forEach>--%>
 						</select>
 					</td>
 				</tr>

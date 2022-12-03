@@ -73,10 +73,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>姓名</td>
 					<td>用户账号</td>
 					<td>用户状态</td>
-<%--					<td>关联字段</td>--%>
-<%--					<td>角色主键</td>--%>
 					<td>用户角色</td>
-		    		<td>操作</td>
+					<c:if test="${login.permissionId==1}">
+						<td>操作</td>
+					</c:if>
 		    	</tr>
 	    	</thead>
 	    	<tbody>
@@ -87,14 +87,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${user.username}</td>
 						<td>${user.userId}</td>
 						<td>${user.status}</td>
-<%--						<td>${user.permissionId}</td>--%>
-<%--						<td>${user.permission.id}</td>--%>
 						<td>${user.permission.permissionName}</td>
 			    		<td>
-<%--			    			<a href="/getCustomerById?id=${user.userId}">用户详情</a>&nbsp;--%>
-							<a href="/user/toUpdateUser?userId=${user.userId}">修改</a>&nbsp;
-
-							<c:if test="${user.permissionId>1}">
+							<c:if test="${login.permissionId==1}">
+								<a href="/user/toUpdateUser?userId=${user.userId}">修改</a>&nbsp;
 								<a href="/user/deleteUserByUserId?userId=${user.userId}" class="del">删除</a>&nbsp;
 							</c:if>
 			    		</td>
