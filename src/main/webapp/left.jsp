@@ -42,6 +42,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</c:if>
     		<li><a href="/user/findAllUser" target="con">--用户列表</a></li>
     	</ul>
+		<h3 class="h2"><span>供应商管理</span></h3>
+		<ul>
+			<li><a href="jsp/product/add.jsp" target="con">--供应商添加</a></li>
+			<li><a href="jsp/product/list.jsp" target="con">--供应商列表</a></li>
+		</ul>
     	<h3 class="h2"><span>物料管理</span></h3>
     	<ul>
 			<li><a href="productList.jsp" target="con">--物料列表</a></li>
@@ -57,16 +62,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li><a href="delivery.jsp" target="con">--出库记录</a></li>
 			<li><a href="inventory.jsp" target="con">--所有记录</a></li>
 		</ul>
-<%--		<h3 class="h2"><span>商品管理</span></h3>--%>
-<%--		<ul>--%>
-<%--			<li><a href="jsp/product/add.jsp" target="con">--商品添加</a></li>--%>
-<%--			<li><a href="jsp/product/list.jsp" target="con">--商品列表</a></li>--%>
-<%--		</ul>--%>
 <%--    	<h3 class="h4"><span>订单管理</span></h3>--%>
 <%--    	<ul>--%>
 <%--    		<li><a href="/getAllOrders" target="con">--订单列表</a></li>--%>
 <%--		</ul>--%>
-    	<h3 class="h5"><span>其他操作</span></h3>
+    	<h3 class="h2"><span>其他操作</span></h3>
     	<ul>
     		<li><a href="/aboutTeam" target="con">--关于我们</a></li>
     	</ul>
