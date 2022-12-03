@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'add.jsp' starting page</title>
+    <title>分类信息更新</title>
     
    	<link href="<%=request.getContextPath() %>/css/add.css" type="text/css" rel="stylesheet">
 	
