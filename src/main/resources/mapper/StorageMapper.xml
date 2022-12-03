@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyt.manager.modular.system.mapper.StorageMapper">
+    <resultMap id="baseMap" type="Storage">
+        <id property="id" column="id"/>
+        <result property="productName" column="product_name"/>
+        <result property="storageNumber" column="storage_number"/>
+        <result property="storageUser" column="storage_user"/>
+        <result property="storageTime" column="storage_time"/>
+    </resultMap>
+</mapper>

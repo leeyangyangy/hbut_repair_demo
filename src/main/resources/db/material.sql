@@ -45,6 +45,24 @@ CREATE TABLE t_type(
                        update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 );
 
+-- 出库记录
+create table delivery(
+                         id INT PRIMARY KEY AUTO_INCREMENT COMMENT '出库记录主键',
+                         product_name varchar(200) not null COMMENT '出库产品名',
+                         delivery_number BIGINT not null COMMENT '出库数量',
+                         delivery_user varchar(50) not null  COMMENT '出库操作人',
+                         delivery_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '出库时间'
+);
+
+-- 入库记录
+create table storage(
+                        id INT PRIMARY KEY AUTO_INCREMENT COMMENT '入库记录主键',
+                        product_name varchar(200) not null COMMENT '入库产品名',
+                        storage_number BIGINT not null COMMENT '入库数量',
+                        storage_user varchar(50) not null  COMMENT '入库操作人',
+                        storage_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '入库时间'
+);
+
 -- 用户表
 CREATE TABLE t_user(
                        id INT PRIMARY KEY AUTO_INCREMENT COMMENT "用户主键id",
