@@ -9,4 +9,46 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
+
+    <!--    添加小类-->
+    <insert id="addClassify" parameterType="Classify">
+        insert into classify (classify_name, classify_operator)
+            value (#{classifyName},#{operator})
+    </insert>
+
+    <!--    按名修改-->
+    <update id="updateClassifyByName" parameterType="Classify">
+        update classify
+        set classify_name=#{classifyName},
+            classify_operator=#{operator}
+        where id = #{id}
+    </update>
+
+    <!--    主键删除-->
+    <delete id="delClassifyById" parameterType="Integer">
+        delete
+        from classify
+        where id = #{id}
+    </delete>
+
+    <!--    查询全部-->
+    <select id="findAllClassify" resultMap="baseMap">
+        select *
+        from classify
+    </select>
+
+
+    <!--        按名查找-->
+    <select id="findClassifyByName" parameterType="String" resultMap="baseMap">
+        select *
+        from classify
+        where classify_name = #{classifyName}
+    </select>
+
+    <!--    按id查找-->
+    <select id="findClassifyById" parameterType="Integer" resultMap="baseMap">
+        select *
+        from classify
+        where id = #{id}
+    </select>
 </mapper>

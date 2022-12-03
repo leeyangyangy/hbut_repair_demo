@@ -3,6 +3,8 @@ package com.lyt.manager.modular.system.service;
 import com.lyt.manager.modular.system.pojo.Type;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -12,5 +14,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-11-28
  */
 public interface TypeService extends IService<Type> {
+    //    查询全部种类（小类别）
+    List<Type> findAllType();
 
+    //    添加类别（小类别）
+    int addType(Type type);
+
+    //    删除类别（小类别）
+    int delTypeById(Integer id);
+
+    //    按名查找
+    Type findTypeByName(String typeName);
+
+    //    按名修改
+    int updateTypeByName(Type type);
+
+    //    按id查找
+    Type findTypeById(Integer id);
 }
