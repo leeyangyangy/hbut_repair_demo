@@ -44,21 +44,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	</ul>
     	<h3 class="h2"><span>物料管理</span></h3>
     	<ul>
-    		<li><a href="jsp/product/add.jsp" target="con">--物料添加</a></li>
-    		<li><a href="jsp/product/list.jsp" target="con">--物料列表</a></li>
-    	</ul>
-		<h3 class="h2"><span>商品管理</span></h3>
+			<li><a href="productList.jsp" target="con">--物料列表</a></li>
+<%--			物料==产品--%>
+<%--			<li><a href="jsp/product/add.jsp" target="con">--物料添加</a></li>--%>
+<%--			<li><a href="jsp/product/add.jsp" target="con">--物料删除</a></li>--%>
+<%--			查询所有物料的类别，增删改查--%>
+			<li><a href="typeList.jsp" target="con">--物料种类标签</a></li>
+		</ul>
+		<h3 class="h2"><span>出入库记录</span></h3>
 		<ul>
-			<li><a href="jsp/product/add.jsp" target="con">--商品添加</a></li>
-			<li><a href="jsp/product/list.jsp" target="con">--商品列表</a></li>
+			<li><a href="storage.jsp" target="con">--入库记录</a></li>
+			<li><a href="delivery.jsp" target="con">--出库记录</a></li>
+			<li><a href="inventory.jsp" target="con">--所有记录</a></li>
 		</ul>
-    	<h3 class="h4"><span>订单管理</span></h3>
-    	<ul>
-    		<li><a href="/getAllOrders" target="con">--订单列表</a></li>
-		</ul>
+<%--		<h3 class="h2"><span>商品管理</span></h3>--%>
+<%--		<ul>--%>
+<%--			<li><a href="jsp/product/add.jsp" target="con">--商品添加</a></li>--%>
+<%--			<li><a href="jsp/product/list.jsp" target="con">--商品列表</a></li>--%>
+<%--		</ul>--%>
+<%--    	<h3 class="h4"><span>订单管理</span></h3>--%>
+<%--    	<ul>--%>
+<%--    		<li><a href="/getAllOrders" target="con">--订单列表</a></li>--%>
+<%--		</ul>--%>
     	<h3 class="h5"><span>其他操作</span></h3>
     	<ul>
-    		<li><a href="" target="con">--其他操作</a></li>
+    		<li><a href="/aboutTeam" target="con">--关于我们</a></li>
     	</ul>
     </div>
   </body>
