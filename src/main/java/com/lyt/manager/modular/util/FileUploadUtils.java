@@ -33,11 +33,24 @@ public class FileUploadUtils {
      * }
      */
     //指定本地文件夹存储图片，写到需要保存的目录下
-    @Value("${uploadTempDir}")
+//    @Value("${uploadTempDir}")
     String filePath;
+    //    linux
+    String linuxPath = "/home/admin/upload/images/";
+    String winPath = "D:\\images";
+
 
     //    单文件上传工具类
     public String upload(MultipartFile fileUpload) {
+
+//        转换路径
+//        filePath=linuxPath;
+        filePath=winPath+"/";
+        File dir = new File(filePath);
+//        判断是否需要创建文件夹？
+        if (!dir.isDirectory())
+            dir.mkdir();
+
         //获取文件名
         String fileName = fileUpload.getOriginalFilename();
         System.out.println("原始名" + fileUpload.getOriginalFilename());
@@ -98,6 +111,7 @@ public class FileUploadUtils {
 
     /**
      * 参数解释:
+     *
      * @param file64 原始字符串
      *               prefix
      * @return String
@@ -122,14 +136,14 @@ public class FileUploadUtils {
 //        把 / 替换成 .
         suffixName = suffixName.replace("/", ".");
 //        去 ;
-        suffixName=suffixName.substring(0,suffixName.indexOf(";"));
+        suffixName = suffixName.substring(0, suffixName.indexOf(";"));
 //        拼接文件名
         fileName = fileName + suffixName;
         System.out.println(suffixName);
         System.out.println(fileName);
         try {
 //            拼接路径和文件名
-            FileOutputStream fileOuputStream = new FileOutputStream(filePath+fileName);
+            FileOutputStream fileOuputStream = new FileOutputStream(filePath + fileName);
             fileOuputStream.write(fileBytes);
         } catch (IOException e) {
             e.printStackTrace();
