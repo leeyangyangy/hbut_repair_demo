@@ -8,4 +8,16 @@
         <result property="storageUser" column="storage_user"/>
         <result property="storageTime" column="storage_time"/>
     </resultMap>
+
+    <!--    记录-->
+    <insert id="addStorage" parameterType="Storage">
+        insert into storage (product_name, storage_number, storage_user)
+        values (#{productName}, #{storageNumber}, #{storageUser})
+    </insert>
+
+    <!--    查询全部-->
+    <select id="findAllStorage" resultMap="baseMap">
+        select *
+        from storage
+    </select>
 </mapper>

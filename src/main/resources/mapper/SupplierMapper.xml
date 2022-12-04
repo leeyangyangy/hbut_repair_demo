@@ -8,4 +8,46 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
+    <!--    添加供应商-->
+    <insert id="addSupplier" parameterType="Supplier">
+        insert into supplier (supplier_name, supplier_profile)
+        values (#{supplierName}, #{supplierProfile})
+    </insert>
+
+    <!--    按id更新-->
+    <update id="updateSupplierById" parameterType="Supplier">
+        update supplier
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="supplierName != null">supplier_name=#{supplierName},</if>
+            <if test="supplierProfile != null">supplier_profile=#{supplierProfile},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!--    按id删除-->
+    <delete id="delSupplierByName" parameterType="Integer">
+        delete
+        from supplier
+        where id = #{id}
+    </delete>
+
+    <!--    查询全部-->
+    <select id="findAllSupplier" resultMap="baseMap">
+        select *
+        from supplier
+    </select>
+
+    <!--    按id查找-->
+    <select id="findSupplierById" parameterType="Integer" resultMap="baseMap">
+        select *
+        from supplier
+        where id = #{id}
+    </select>
+
+    <!--    按名查找-->
+    <select id="findSupplierByName" parameterType="String" resultMap="baseMap">
+        select *
+        from supplier
+        where supplier_name = #{supplierName}
+    </select>
 </mapper>

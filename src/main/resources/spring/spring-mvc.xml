@@ -29,6 +29,7 @@
         <!-- 上传文件大小限制为10M，10*1024*1024 -->
         <property name="maxUploadSize" value="10485760"/>
         <property name="uploadTempDir" value="file:D:/images/"/>
+        <property name="defaultEncoding" value="UTF-8" />
 <!--        <property name="uploadTempDir" value="file:/home/admin/upload/images/"/>-->
     </bean>
 </beans>

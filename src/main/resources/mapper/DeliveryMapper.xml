@@ -8,4 +8,16 @@
         <result property="deliveryUser" column="delivery_user"/>
         <result property="deliveryTime" column="delivery_time"/>
     </resultMap>
+
+    <!--    记录-->
+    <insert id="addDelivery" parameterType="Delivery">
+        insert into delivery (product_name, delivery_number, delivery_user)
+        values (#{productName}, #{deliveryNumber}, #{deliveryUser})
+    </insert>
+
+    <!--    查询全部-->
+    <select id="findAllDelivery" resultMap="baseMap">
+        select *
+        from delivery
+    </select>
 </mapper>

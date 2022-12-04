@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>类别列表</title>
+    <title>My JSP 'list.jsp' starting page</title>
     
 	<link  href="<%=request.getContextPath() %>/css/content.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<div id="up">
 	   <ul>
-	    	<li><span><a href="javascript:history.go(-1);">平台首页 </a>&gt; 物料管理 &gt; 物料种类</span></li>
+	    	<li><span><a href="javascript:history.go(-1);">平台首页 </a>&gt; 出入库记录 &gt; 所有记录</span></li>
 	   </ul>
 	</div>
 	<div id="down">
@@ -70,72 +70,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	<tr class="head">
 		    		<td>序号</td>
 					<td>主键</td>
-					<td>大类</td>
-					<td>操作人</td>
-					<td>创建时间</td>
-					<td>修改时间</td>
-<%--		    		<td>操作</td>--%>
-					<c:if test="${login.permissionId==1}">
-						<td>操作</td>
-					</c:if>
+					<td>姓名</td>
+					<td>用户账号</td>
+					<td>用户状态</td>
+<%--					<td>关联字段</td>--%>
+<%--					<td>角色主键</td>--%>
+					<td>用户角色</td>
+		    		<td>操作</td>
 		    	</tr>
 	    	</thead>
 	    	<tbody>
-				<c:forEach items="${allType}" var="type" varStatus="status">
+				<c:forEach items="${allUser}" var="user" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
-						<td>${type.id}</td>
-						<td>${type.typeName}</td>
-						<td>${type.typeOperator}</td>
-						<td>${type.createTime}</td>
-						<td>${type.updateTime}</td>
+						<td>${user.id}</td>
+						<td>${user.username}</td>
+						<td>${user.userId}</td>
+						<td>${user.status}</td>
+<%--						<td>${user.permissionId}</td>--%>
+<%--						<td>${user.permission.id}</td>--%>
+						<td>${user.permission.permissionName}</td>
 			    		<td>
 <%--			    			<a href="/getCustomerById?id=${user.userId}">用户详情</a>&nbsp;--%>
-							<c:if test="${login.permissionId==1}">
-								<a href="/type/toFindType?id=${type.id}">修改</a>&nbsp;
-								<a href="/type/deleteTypeById?id=${type.id}" class="del">删除</a>&nbsp;
+							<a href="/user/toUpdateUser?userId=${user.userId}">修改</a>&nbsp;
+
+							<c:if test="${user.permissionId>1}">
+								<a href="/user/deleteUserByUserId?userId=${user.userId}" class="del">删除</a>&nbsp;
 							</c:if>
 			    		</td>
 			    	</tr>
 				</c:forEach>
 			</tbody>
 	    </table>
-		<br>
-		<table width="1000px" cellpadding="0" cellspacing="0">
-			<thead>
-			<tr class="head">
-				<td>序号</td>
-				<td>主键</td>
-				<td>详细分类</td>
-				<td>操作人</td>
-				<td>创建时间</td>
-				<td>修改时间</td>
-				<td>操作</td>
-			</tr>
-			</thead>
-			<tbody>
-			<c:forEach items="${allClassify}" var="classify" varStatus="status">
-				<tr>
-					<td>${status.count}</td>
-					<td>${classify.id}</td>
-					<td>${classify.classifyName}</td>
-					<td>${classify.operator}</td>
-					<td>${classify.createTime}</td>
-					<td>${classify.updateTime}</td>
-					<td>
-							<%--			    			<a href="/getCustomerById?id=${user.userId}">用户详情</a>&nbsp;--%>
-						<a href="/classify/toFindClassify?id=${classify.id}">修改</a>&nbsp;
-
-						<c:if test="${login.permissionId==1}">
-							<a href="/classify/deleteClassifyById?id=${classify.id}" class="del">删除</a>&nbsp;
-						</c:if>
-					</td>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-
-
     </div>
   </body>
 </html>

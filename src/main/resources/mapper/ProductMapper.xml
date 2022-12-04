@@ -17,6 +17,78 @@
         <result property="productOperator" column="product_operator"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-        <result property="deliverTime" column="deliver_time"/>
     </resultMap>
+    <!--    <result property="deliverTime" column="deliver_time"/>-->
+
+    <!--    添加物料-->
+    <insert id="addProduct">
+        insert into product (productSupplier, product_name, product_profile, product_picture, product_type,
+                             product_classify,
+                             product_value, product_price, product_units, product_warn, product_operator)
+        values (#{productSupplier}, #{productName}, #{productProfile}, #{productPicture}, #{productType},
+                #{productClassify}, #{productValue}, #{productPrice}, #{productUnits}, #{productWarn},
+                #{productOperator})
+    </insert>
+
+    <!--    修改物料-->
+    <update id="updateProductById" parameterType="Product">
+        update product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productSupplier != null">product_supplier=#{productSupplier},</if>
+            <if test="productName != null">product_name=#{productName},</if>
+            <if test="productProfile != null">product_profile=#{productProfile},</if>
+            <if test="productPicture != null">product_picture=#{productPicture},</if>
+            <if test="productClassify != null">product_classify=#{productClassify},</if>
+            <if test="productType != null">product_type=#{productType},</if>
+            <if test="productValue != null">product_value=#{productValue},</if>
+            <if test="productPrice != null">product_price=#{productPrice},</if>
+            <if test="productUnits != null">product_units=#{productUnits},</if>
+            <if test="productWarn != null">product_warn=#{productWarn},</if>
+            <if test="productOperator != null">product_operator=#{productOperator},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!--    入库操作-->
+    <update id="addProductValueById">
+        update product
+        set product_value=product_value + #{value}
+        where id = #{id}
+    </update>
+
+    <!--    出库操作-->
+    <update id="subProductValueById">
+        update product
+        set product_value=product_value - #{value}
+        where id = #{id}
+    </update>
+
+    <!--    删除物料-->
+    <delete id="delProductById" parameterType="Integer">
+        delete
+        from product
+        where id = #{id}
+    </delete>
+
+    <!--    查询全部物料-->
+    <select id="findAllProduct" resultMap="baseMap">
+        select *
+        from product
+    </select>
+
+    <!--    查库存-->
+    <select id="findProductValueById" parameterType="Integer" resultMap="baseMap">
+        select product_value
+        from product
+        where id = #{id}
+    </select>
+
+    <!--    按id查找-->
+    <select id="findProductById" parameterType="Integer" resultMap="baseMap">
+        select *
+        from product
+        where id = #{id}
+    </select>
+
+
 </mapper>

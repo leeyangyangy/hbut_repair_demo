@@ -48,7 +48,7 @@
     </listener>
 
     <!--    配置代理过滤器，将部门注入到login.jsp-->
-<!--        filter-name配置被代理过滤器bean的id-->
+    <!--        filter-name配置被代理过滤器bean的id-->
     <filter>
         <filter-name>permissionFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -62,11 +62,12 @@
         <url-pattern>/login.jsp</url-pattern>
         <url-pattern>/user/login</url-pattern>
         <url-pattern>/addUser.jsp</url-pattern>
-<!--        <url-pattern>/userUpdate.jsp</url-pattern>-->
-<!--        <url-pattern>/updateUser.jsp</url-pattern>-->
+        <!--        <url-pattern>/userUpdate.jsp</url-pattern>-->
+        <!--        <url-pattern>/updateUser.jsp</url-pattern>-->
         <url-pattern>/</url-pattern>
     </filter-mapping>
 
+    <!--    类别-->
     <filter>
         <filter-name>typeFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -80,10 +81,30 @@
         <url-pattern>/typeList.jsp</url-pattern>
         <url-pattern>/type/typeList</url-pattern>
         <url-pattern>/typeList</url-pattern>
+        <url-pattern>/updateProduct.jsp</url-pattern>
+        <url-pattern>/addProduct.jsp</url-pattern>
+    </filter-mapping>
+
+    <!--    分类-->
+    <filter>
+        <filter-name>classifyFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>classifyFilter</filter-name>
+        <url-pattern>/typeList.jsp</url-pattern>
+        <url-pattern>/type/typeList</url-pattern>
+        <url-pattern>/typeList</url-pattern>
+        <url-pattern>/product/findProductById</url-pattern>
+        <url-pattern>/addProduct.jsp</url-pattern>
     </filter-mapping>
 
     <filter>
-        <filter-name>classifyFilter</filter-name>
+        <filter-name>productFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <init-param>
             <param-name>targetFilterLifecycle</param-name>
@@ -91,9 +112,50 @@
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>classifyFilter</filter-name>
-        <url-pattern>/typeList.jsp</url-pattern>
-        <url-pattern>/type/typeList</url-pattern>
-        <url-pattern>/typeList</url-pattern>
+        <filter-name>productFilter</filter-name>
+        <url-pattern>/productList.jsp</url-pattern>
+    </filter-mapping>
+
+    <!--    供应商-->
+    <filter>
+        <filter-name>supplierFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>supplierFilter</filter-name>
+        <url-pattern>/updateProduct</url-pattern>
+        <url-pattern>/addProduct.jsp</url-pattern>
+        <url-pattern>/supplierList.jsp</url-pattern>
+    </filter-mapping>
+
+<!--    出入库记录-->
+    <filter>
+        <filter-name>storageFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>storageFilter</filter-name>
+        <url-pattern>/storage.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>deliveryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>deliveryFilter</filter-name>
+        <url-pattern>/delivery.jsp</url-pattern>
     </filter-mapping>
 </web-app>
