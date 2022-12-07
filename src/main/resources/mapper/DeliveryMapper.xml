@@ -20,4 +20,8 @@
         select *
         from delivery
     </select>
+    <select id="findDeliveryByLikeUserName" parameterType="String" resultMap="baseMap">
+        # 按姓名分组查询
+        select * from delivery where delivery_user like concat('%',#{name},'%') order by delivery_user;
+    </select>
 </mapper>
