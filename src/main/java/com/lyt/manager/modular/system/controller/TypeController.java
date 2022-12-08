@@ -6,11 +6,7 @@ import com.lyt.manager.modular.system.pojo.Type;
 import com.lyt.manager.modular.system.service.ClassifyService;
 import com.lyt.manager.modular.system.service.TypeService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -66,5 +62,46 @@ public class TypeController {
         return "typeList";
     }
 
+
+    //    添加
+    @PostMapping("add")
+    public String add(Type type, HttpServletRequest request) {
+        System.out.println(type);
+//        添加操作
+        typeService.addType(type);
+//        展示数据
+        List<Classify> allClassify = classifyService.findAllClassify();
+        request.setAttribute("allClassify", allClassify);
+        List<Type> allType = typeService.findAllType();
+        request.setAttribute("allType", allType);
+        return "typeList";
+    }
+
+    //    按名查找
+    @PostMapping("checkTypeName")
+    @ResponseBody
+    public boolean checkTypeName(String typeName) {
+        System.out.println("检查名称是否存在");
+        System.out.println(typeName);
+        if (null == typeService.findTypeByName(typeName)) {
+//            不存在
+            return false;
+        } else {
+//            存在
+            return true;
+        }
+    }
+
+    @GetMapping("deleteTypeById")
+    public String deleteTypeById(HttpServletRequest request, Integer id) {
+//        删除
+        typeService.delTypeById(id);
+//        展示数据
+        List<Classify> allClassify = classifyService.findAllClassify();
+        request.setAttribute("allClassify", allClassify);
+        List<Type> allType = typeService.findAllType();
+        request.setAttribute("allType", allType);
+        return "typeList";
+    }
 }
 

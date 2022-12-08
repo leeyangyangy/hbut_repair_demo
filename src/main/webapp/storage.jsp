@@ -71,6 +71,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>序号</td>
 				<td>入库物料名称</td>
 				<td>入库数量</td>
+<%--				<td>单价</td>--%>
+<%--				<td>总价</td>--%>
 				<td>操作人</td>
 				<td>入库时间</td>
 			</tr>
@@ -81,6 +83,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${status.count}</td>
 					<td>${storage.productName}</td>
 					<td>${storage.storageNumber}</td>
+<%--					<td></td>--%>
+<%--					<td></td>--%>
 					<td>${storage.storageUser}</td>
 					<td>${storage.storageTime}</td>
 				</tr>

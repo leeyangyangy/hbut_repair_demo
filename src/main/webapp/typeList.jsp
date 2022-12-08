@@ -65,6 +65,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   </ul>
 	</div>
 	<div id="down">
+
+		<c:if test="${login.permissionId==1 || login.permissionId==3}">
+		<%--		添加tag--%>
+			<table width="1000px" cellpadding="0" cellspacing="0">
+				<thead>
+				<tr class="head">
+					<td><a href="addType.jsp">添加大类</a></td>
+				</tr>
+				<tr class="head">
+					<td><a href="addClassify.jsp">添加小类</a></td>
+				</tr>
+				</thead>
+			</table>
+	</c:if>
+
 	    <table width="1000px" cellpadding="0" cellspacing="0">
 	    	<thead>
 		    	<tr class="head">
