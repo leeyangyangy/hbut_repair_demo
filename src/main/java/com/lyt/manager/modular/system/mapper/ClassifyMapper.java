@@ -2,7 +2,6 @@ package com.lyt.manager.modular.system.mapper;
 
 import com.lyt.manager.modular.system.pojo.Classify;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lyt.manager.modular.system.pojo.Type;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface ClassifyMapper extends BaseMapper<Classify> {
     List<Classify> findAllClassify();
 
     //    添加类别（小类别）
-    int addClassify(Type type);
+    int addClassify(Classify classify);
 
     //    删除类别（小类别）
     int delClassifyById(Integer id);

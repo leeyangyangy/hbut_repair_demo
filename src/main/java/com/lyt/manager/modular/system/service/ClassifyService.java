@@ -2,7 +2,6 @@ package com.lyt.manager.modular.system.service;
 
 import com.lyt.manager.modular.system.pojo.Classify;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lyt.manager.modular.system.pojo.Type;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface ClassifyService extends IService<Classify> {
     List<Classify> findAllClassify();
 
     //    添加类别（小类别）
-    int addClassify(Type type);
+    int addClassify(Classify classify);
 
     //    删除类别（小类别）
     int delClassifyById(Integer id);
