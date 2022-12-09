@@ -98,27 +98,26 @@ public class ProductController {
          */
         FileUploadUtils fileUploadUtils = new FileUploadUtils();
         String upload = fileUploadUtils.upload(multipartFile);
+        System.out.println("上传文件=="+upload);
 //        if () {
 //
 //        } else
         System.out.println("url=" + url);
-        if (upload != null) {
+        if(upload==null)p.setProductPicture(url);
+        else {
             String filePath;
             //    linux
-            String linuxPath = "/home/admin/upload/images/";
-            String winPath = "D://images";
+//            String linuxPath = "/home/admin/upload/images/";
+//            String winPath = "D://images";
+            String path = "images";
             System.out.println("final upload=" + upload);
 //            删除文件
 //            ......
-            p.setProductPicture(winPath + '/' + upload);
-        } else if (url != null) {
-            if (upload != null) {
-                p.setProductPicture(url);
-            }
-            System.out.println("null upload");
-        } else {
-            System.out.println("default");
-        }
+//            win直接回显（配置webMvc）
+//            p.setProductPicture(winPath + '/' + upload);
+            p.setProductPicture(path + '/' + upload);
+        };
+        System.out.println("图片地址=="+p.getProductPicture());
         productService.updateProductById(p);
         List<Product> allProduct = productService.findAllProduct();
         request.setAttribute("allProduct", allProduct);
@@ -129,15 +128,25 @@ public class ProductController {
     @GetMapping("subProductValueById")
     public String subProductValueById(Integer id, HttpSession session) {
         Product product = productService.findProductById(id);
-        if (product.getProductValue() <= 0) {
+        if (product.getProductValue() <= product.getProductWarn()) {
             return "redirect:/productList.jsp";
         } else {
+            /**
+             * 假设库存数量是10，一次出10台，刚好可以
+             * 如果库存数量是9，强制出10台，预警值恰好是5，这时候如何设计？
+             */
+//            出货数
+            int export=10;
+            if(export>=product.getProductValue()){
+//                不允许出库
+                return "redirect:/productList.jsp";
+            }
 //            默认减去10
-            productService.subProductValueById(id, 10);
+            productService.subProductValueById(id, export);
 //            填写出库记录
             Delivery delivery = new Delivery();
-//            数量
-            delivery.setDeliveryNumber(10L);
+//            数量  类型强转
+            delivery.setDeliveryNumber(Long.valueOf(export));
             delivery.setProductName(product.getProductName());
 //            获取当前session对象
             User user = (User) session.getAttribute("login");
@@ -170,35 +179,44 @@ public class ProductController {
 
     //    添加物料
     @PostMapping("addProduct")
-    public String addProduct(Product product, MultipartFile multipartFile, String url) {
-        System.out.println("---- 添加物料控制器 ----");
-        System.out.println(product);
+    public String addProduct(Product p, MultipartFile multipartFile, String url, HttpServletRequest request) {
+        System.out.println(multipartFile);
+        System.out.println("p=" + p);
         /**
-         * 处理结果
+         *
+         * 处理文件上传
+         *
+         * 数据库直接存文件名，后台自行拼接？
+         *
          */
         FileUploadUtils fileUploadUtils = new FileUploadUtils();
         String upload = fileUploadUtils.upload(multipartFile);
+        System.out.println("上传文件=="+upload);
+//        if () {
+//
+//        } else
         System.out.println("url=" + url);
-        if (upload != null) {
+        if(upload==null)p.setProductPicture(url);
+        else {
             String filePath;
             //    linux
-            String linuxPath = "/home/admin/upload/images/";
-//            windows
-            String winPath = "D://images";
+//            String linuxPath = "/home/admin/upload/images/";
+//            String winPath = "D://images";
+            String path = "images";
             System.out.println("final upload=" + upload);
 //            删除文件
 //            ......
-            product.setProductPicture(winPath + '/' + upload);
-        } else if (url != null) {
-            if (upload != null) {
-                product.setProductPicture(url);
-            }
-            System.out.println("null upload");
-        } else {
-            System.out.println("default");
-        }
-        int total = productService.addProduct(product);
-        System.out.println("total=" + total);
+//            win直接回显（配置webMvc）
+//            p.setProductPicture(winPath + '/' + upload);
+            p.setProductPicture(path + '/' + upload);
+        };
+        p.setProductValue(0L);
+//        if(p.getProductUnits().equals("null"))p.setProductUnits("台");
+        System.out.println("图片地址=="+p.getProductPicture());
+//        添加操作
+        productService.addProduct(p);
+        List<Product> allProduct = productService.findAllProduct();
+        request.setAttribute("allProduct", allProduct);
         return "redirect:/productList.jsp";
     }
 }

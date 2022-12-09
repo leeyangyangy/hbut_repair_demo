@@ -16,7 +16,8 @@
     <!--    <context:component-scan base-package="com.**.service"/>-->
     <context:component-scan base-package="com.lyt.manager.modular.system.service"/>
     <!--    扫描过滤器-->
-    <context:component-scan base-package="com.lyt.manager.framework.spring.filter"/>
+<!--    <context:component-scan base-package="com.lyt.manager.framework.spring.filter"/>-->
+    <context:component-scan base-package="com.lyt.manager.framework.spring.**"/>
     <!--引入db.properteis文件-->
     <context:property-placeholder location="classpath:db/db.properties"/>
     <!--    导入mybatis-->

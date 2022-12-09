@@ -63,7 +63,7 @@
     <form method="post" action="/product/addProduct" enctype="multipart/form-data">
         <table width="500px">
             <tr>
-                <input type="hidden" name="productOperator" value="${result.productOperator}"/>
+                <input type="hidden" name="productOperator" value="${login.username}"/>
                 <td>物料名称：</td>
                 <td><input type="text" name="productName" value="${result.productName}" class="in"/></td>
             </tr>
@@ -83,9 +83,11 @@
                 <td>物料价格：</td>
                 <td><input type="text" name="productPrice" value="${result.productPrice}" class="in"/></td>
             </tr>
+            <input type="hidden" name="productValue" value="0" class="in"/>
+            <input type="hidden" name="productUnits" value="台" class="in"/>
             <tr>
                 <td>物料预警值：</td>
-                <td><input type="text" name="productPrice" value="${result.productWarn}" class="in"/></td>
+                <td><input type="text" name="productWarn" value="${result.productWarn}" class="in"/></td>
             </tr>
             <tr>
                 <td>物料类别</td>

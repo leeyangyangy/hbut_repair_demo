@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td>物料预警值：</td>
-					<td><input type="text" name="productPrice" value="${result.productWarn}" class="in"/></td>
+					<td><input type="text" name="productWarn" value="${result.productWarn}" class="in"/></td>
 				</tr>
 				<tr>
 					<td>物料类别</td>

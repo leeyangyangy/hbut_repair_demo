@@ -22,7 +22,7 @@
 
     <!--    添加物料-->
     <insert id="addProduct">
-        insert into product (productSupplier, product_name, product_profile, product_picture, product_type,
+        insert into product (product_supplier, product_name, product_profile, product_picture, product_type,
                              product_classify,
                              product_value, product_price, product_units, product_warn, product_operator)
         values (#{productSupplier}, #{productName}, #{productProfile}, #{productPicture}, #{productType},
