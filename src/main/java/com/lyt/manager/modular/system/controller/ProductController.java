@@ -211,7 +211,7 @@ public class ProductController {
             p.setProductPicture(path + '/' + upload);
         };
         p.setProductValue(0L);
-//        if(p.getProductUnits().equals("null"))p.setProductUnits("台");
+        if(p.getProductUnits()==null)p.setProductUnits("台");
         System.out.println("图片地址=="+p.getProductPicture());
 //        添加操作
         productService.addProduct(p);

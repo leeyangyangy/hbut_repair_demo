@@ -84,7 +84,7 @@
                 <td><input type="text" name="productPrice" value="${result.productPrice}" class="in"/></td>
             </tr>
             <input type="hidden" name="productValue" value="0" class="in"/>
-            <input type="hidden" name="productUnits" value="台" class="in"/>
+<%--            <input type="hidden" name="productUnits" class="in"/>--%>
             <tr>
                 <td>物料预警值：</td>
                 <td><input type="text" name="productWarn" value="${result.productWarn}" class="in"/></td>
@@ -121,16 +121,8 @@
             </tr>
             <tr>
                 <td>物料单位：</td>
-                <td><input type="text" name="productUnits" value="${result.productUnits}" class="in"/></td>
+                <td><input type="text" name="productUnits" value="台" class="in"/></td>
             </tr>
-            <%--				<tr>--%>
-            <%--					<td>物料单位：</td>--%>
-            <%--					<td><input type="text" name="productWarn" value="${result.productUnits}" class="in"/></td>--%>
-            <%--				</tr>--%>
-            <%--				<tr>--%>
-            <%--					<td>物料供应商：</td>--%>
-            <%--					<td><input type="text" name="productSupplier" value="${result.productUnits}" class="in"/></td>--%>
-            <%--				</tr>--%>
             <tr>
                 <td>物料供应商</td>
                 <td>
