@@ -22,9 +22,9 @@ public class SupplierFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("---- supplier doFilter ----");
+//        System.out.println("---- supplier doFilter ----");
         List<Supplier> allSupplier = supplierService.findAllSupplier();
-        allSupplier.forEach(supplier -> System.out.println(supplier));
+//        allSupplier.forEach(supplier -> System.out.println(supplier));
         servletRequest.setAttribute("allSupplier",allSupplier);
 //        放行
         filterChain.doFilter(servletRequest,servletResponse);

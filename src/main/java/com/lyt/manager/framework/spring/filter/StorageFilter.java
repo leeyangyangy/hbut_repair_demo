@@ -18,12 +18,12 @@ public class StorageFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("---- deliveryFilter doFilter ----");
+//        System.out.println("---- deliveryFilter doFilter ----");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("---- deliveryFilter doFilter ----");
+//        System.out.println("---- deliveryFilter doFilter ----");
         List<Storage> allStorage = storageService.findAllStorage();
         servletRequest.setAttribute("allStorage",allStorage);
         //        向下传递

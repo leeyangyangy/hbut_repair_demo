@@ -22,7 +22,7 @@ public class ProductFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("---- productFilter doFilter ----");
+//        System.out.println("---- productFilter doFilter ----");
         List<Product> allProduct = productService.findAllProduct();
         servletRequest.setAttribute("allProduct", allProduct);
         //        请求向下传递

@@ -17,13 +17,13 @@ public class DeliveryFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("---- deliveryFilter init ----");
+//        System.out.println("---- deliveryFilter init ----");
 
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("---- deliveryFilter doFilter ----");
+//        System.out.println("---- deliveryFilter doFilter ----");
         List<Delivery> allDelivery = deliveryService.findAllDelivery();
         servletRequest.setAttribute("allDelivery",allDelivery);
         //        向下传递

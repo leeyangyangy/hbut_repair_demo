@@ -22,7 +22,7 @@ public class ClassifyFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("---- classifyFilter doFilter ----");
+//        System.out.println("---- classifyFilter doFilter ----");
         List<Classify> allClassify = classifyService.findAllClassify();
         servletRequest.setAttribute("allClassify", allClassify);
         //        请求向下传递
