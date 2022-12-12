@@ -42,6 +42,12 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return productMapper.addProductValueById(id, value);
     }
 
+    //    查找
+    @Override
+    public List<Product> findProductByName(String productName) {
+        return productMapper.findProductByName(productName);
+    }
+
     //    删除物料
     @Override
     public int delProductById(Integer id) {

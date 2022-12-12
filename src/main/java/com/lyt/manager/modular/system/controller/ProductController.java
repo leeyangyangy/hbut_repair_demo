@@ -219,5 +219,15 @@ public class ProductController {
         request.setAttribute("allProduct", allProduct);
         return "redirect:/productList.jsp";
     }
+
+//    搜索
+    @PostMapping("searchByProductName")
+    public String searchByProductName(String productName ,HttpServletRequest request){
+//        System.out.println(productName);
+        List<Product> products = productService.findProductByName(productName);
+        request.setAttribute("products",products);
+        return "searchProduct";
+//        return "";
+    }
 }
 
