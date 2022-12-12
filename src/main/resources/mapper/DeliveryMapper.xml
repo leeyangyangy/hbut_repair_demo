@@ -18,7 +18,7 @@
     <!--    查询全部-->
     <select id="findAllDelivery" resultMap="baseMap">
         select *
-        from delivery
+        from delivery order by delivery_time desc
     </select>
     <select id="findDeliveryByLikeUserName" parameterType="String" resultMap="baseMap">
         # 按姓名分组查询

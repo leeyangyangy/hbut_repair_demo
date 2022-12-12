@@ -65,7 +65,7 @@
 <body>
 <div id="up">
     <ul>
-        <li><span><a href="javascript:history.go(-1);">用户管理 </a>&gt; 添加用户 &gt;</span></li>
+        <li><span><a href="javascript:history.go(-1);">物料管理 </a>&gt; 物料标签添加 &gt;</span></li>
     </ul>
 </div>
 <div id="down">
