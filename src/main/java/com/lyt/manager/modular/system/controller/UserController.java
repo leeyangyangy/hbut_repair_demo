@@ -49,9 +49,16 @@ public class UserController {
         User login = userService.login(user);
         System.out.println(login);
         if (login != null) {
-            session.setAttribute("login", login);
-//            return "redirect:main";
-            return "main";
+            if (login.getStatus().equals("冻结")) {
+                request.setAttribute("msg", "账号已冻结，联系管理员");
+                return "login";
+            } else if (login.getStatus().equals("离职")) {
+                request.setAttribute("msg", "员工当前已离职，无法登录");
+                return "login";
+            }else {
+                session.setAttribute("login", login);
+                return "main";
+            }
         } else {
             request.setAttribute("msg", "账号密码错误,部门信息错误");
             return "login";
@@ -88,7 +95,7 @@ public class UserController {
 
     }
 
-//    更新用户表信息
+    //    更新用户表信息
     @PostMapping("/updateUserByUserId")
     public String updateUserByUserId(User user) {
         System.out.println("进入更新控制器");
