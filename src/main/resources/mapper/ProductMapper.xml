@@ -90,5 +90,10 @@
         where id = #{id}
     </select>
 
+<!--    物料按名查找   模糊查询 -->
+    <select id="findProductByName" parameterType="String" resultMap="baseMap">
+        select * from product where product_name like  concat('%',#{productName},'%')
+    </select>
+
 
 </mapper>

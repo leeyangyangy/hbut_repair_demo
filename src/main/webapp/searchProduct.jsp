@@ -94,14 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<div id="up">
 	   <ul>
-	    	<li><span><a href="javascript:history.go(-1);">平台首页 </a>&gt; 物料管理 &gt; 物料列表</span></li>
+	    	<li><span> 物料管理 &gt;  搜索结果 &gt; <a href="javascript:history.go(-1);"> 返回上一页 </a></span></li>
 	   </ul>
 	</div>
 	<div id="down">
-		<form action="/product/searchByProductName" method="post">
-			<input type="text" name="productName" placeholder="物料名称">
-			<input type="submit" value="搜索">
-		</form>
 	    <table width="1000px" cellpadding="0" cellspacing="0">
 	    	<thead>
 		    	<tr class="head">
@@ -125,45 +121,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	</tr>
 	    	</thead>
 	    	<tbody>
-				<c:forEach items="${allProduct}" var="product" varStatus="status">
+				<c:forEach items="${products}" var="ps" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
-						<td id="pid">${product.id}</td>
-						<td>${product.productName}</td>
-						<td>${product.productType}</td>
-						<td>${product.productClassify}</td>
-						<td><img src="${product.productPicture}" alt="" width="50px"></td>
-						<c:if test="${product.productValue<=product.productWarn}">
-							<td style="background-color: red">${product.productValue}</td>
+						<td id="pid">${ps.id}</td>
+						<td>${ps.productName}</td>
+						<td>${ps.productType}</td>
+						<td>${ps.productClassify}</td>
+						<td><img src="${ps.productPicture}" alt="" width="50px"></td>
+						<c:if test="${ps.productValue<=ps.productWarn}">
+							<td style="background-color: red">${ps.productValue}</td>
 						</c:if>
-						<c:if test="${product.productValue>product.productWarn}">
-							<td>${product.productValue}</td>
+						<c:if test="${ps.productValue>ps.productWarn}">
+							<td>${ps.productValue}</td>
 						</c:if>
-						<td>${product.productPrice}</td>
-						<td>${product.productUnits}</td>
-						<td>${product.productWarn}</td>
-						<c:if test="${product.productValue<=product.productWarn}">
+						<td>${ps.productPrice}</td>
+						<td>${ps.productUnits}</td>
+						<td>${ps.productWarn}</td>
+						<c:if test="${ps.productValue<=ps.productWarn}">
 							<td style="background-color: red">低于库存</td>
 						</c:if>
-						<c:if test="${product.productValue>product.productWarn}">
+						<c:if test="${ps.productValue>ps.productWarn}">
 							<td>正常</td>
 						</c:if>
-						<td>${product.productOperator}</td>
-						<td>${product.createTime}</td>
+						<td>${ps.productOperator}</td>
+						<td>${ps.createTime}</td>
 <%--						<td>${product.updateTime}</td>--%>
 <%--						<td>${product.deliverTime}</td>--%>
 			    		<td>
 							<c:if test="${login.permissionId==1}">
-								<a href="/product/findProductById?id=${product.id}" class="del">修改</a>&nbsp;
+								<a href="/product/findProductById?id=${ps.id}" class="del">修改</a>&nbsp;
 							</c:if>
 							<c:if test="${login.permissionId==1}">
-								<a href="/product/deleteProductById?id=${product.id}" class="del">删除</a>&nbsp;
+								<a href="/product/deleteProductById?id=${ps.id}" class="del">删除</a>&nbsp;
 							</c:if>
 							<c:if test="${login.permissionId==1 || login.permissionId==2 || login.permissionId==3}">
-								<a href="/product/subProductValueById?id=${product.id}" class="del">出库</a>&nbsp;
+								<a href="/product/subProductValueById?id=${ps.id}" class="del">出库</a>&nbsp;
 							</c:if>
 							<c:if test="${login.permissionId==1 || login.permissionId==2 || login.permissionId==3}">
-								<a href="/product/addProductValueById?id=${product.id}" class="del">入库</a>&nbsp;
+								<a href="/product/addProductValueById?id=${ps.id}" class="del">入库</a>&nbsp;
 							</c:if>
 			    		</td>
 			    	</tr>

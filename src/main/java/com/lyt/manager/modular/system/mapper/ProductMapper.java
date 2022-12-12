@@ -37,4 +37,6 @@ public interface ProductMapper extends BaseMapper<Product> {
     //    入库
     int addProductValueById(@Param("id") Integer id, @Param("value") Integer value);
 
+//    查找
+    List<Product> findProductByName(String productName);
 }

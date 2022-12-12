@@ -35,4 +35,7 @@ public interface ProductService extends IService<Product> {
 
     //    入库
     int addProductValueById(@Param("id") Integer id, @Param("value") Integer value);
+
+    //    查找
+    List<Product> findProductByName(String productName);
 }
