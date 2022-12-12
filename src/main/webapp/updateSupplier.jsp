@@ -25,16 +25,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   </ul>
 	</div>
 	<div id="down">
-	    <form method="post" action="/user/updateUserByUserId">
+	    <form method="post" action="/supplier/updateSupplierById">
 			<table width="500px">
 				<tr>
+					<input type="hidden" name="id" value="${supplier.id}">
 					<td>供应商名称：</td>
-					<td><input type="text" id="supplierName" name="supplierName" value="" class="in"/></td>
+					<td><input type="text" id="supplierName" name="supplierName" value="${supplier.supplierName}" class="in"/></td>
 					<td><span id="warn" class="warn"></span></td>
 				</tr>
 				<tr>
 					<td>供应商简介：</td>
-					<td><input type="text" name="supplierProfile" value="" class="in"/></td>
+					<td><input type="text" name="supplierProfile" value="${supplier.supplierProfile}" class="in"/></td>
 				</tr>
 				<tr>
 					<td></td>

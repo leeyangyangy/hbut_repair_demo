@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
+import static com.lyt.manager.modular.util.JudgeSystemUtils.OSNAME;
+
 /**
  * @Package: com.lyy.manager.modular.basic.util
  * @Author: LEEYANGYANG
@@ -45,12 +47,18 @@ public class FileUploadUtils {
 
 //        转换路径
 //        filePath=linuxPath;
-        filePath=winPath+"/";
+//        filePath=winPath+"/";
+        //        判断系统？
+        if (OSNAME.equals("Linux")){
+            filePath=linuxPath+"/";
+//            mImagesPath="/home/admin/upload/images/";
+        }else {
+            filePath=winPath+"/";
+        }
         File dir = new File(filePath);
 //        判断是否需要创建文件夹？
         if (!dir.isDirectory())
             dir.mkdir();
-
         //获取文件名
         String fileName = fileUpload.getOriginalFilename();
         System.out.println("原始名" + fileUpload.getOriginalFilename());

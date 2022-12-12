@@ -35,6 +35,8 @@ public class SupplierController {
     //    更新
     @PostMapping("updateSupplierById")
     public String updateSupplierById(Supplier supplier) {
+        System.out.println(supplier);
+        supplierService.updateSupplierById(supplier);
         return "redirect:/supplierList.jsp";
     }
 
@@ -42,6 +44,9 @@ public class SupplierController {
     @PostMapping("addSupplier")
     public String addSupplier(Supplier supplier) {
         System.out.println(supplier);
+        if(supplier.getSupplierName().trim().equals("")) return "redirect:/supplierList.jsp";
+        if(supplier.getSupplierName().trim().equals(supplierService.findSupplierByName(supplier.getSupplierName())))
+            return "redirect:/supplierList.jsp";
         int total = supplierService.addSupplier(supplier);
         System.out.println("total=" + total);
         return "redirect:/supplierList.jsp";

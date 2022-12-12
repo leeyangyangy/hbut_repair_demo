@@ -35,16 +35,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div>
     	<h3 id="con"></h3>
-    	<h3 class="h1"><span>用户管理</span></h3>
-    	<ul>
-    		<c:if test="${login.permissionId==1}">
-    			<li><a href="addUser.jsp" target="con">--用户添加</a></li>
-			</c:if>
-    		<li><a href="/user/findAllUser" target="con">--用户列表</a></li>
-    	</ul>
+
+		<c:if test="${login.permissionId==1}">
+			<h3 class="h1"><span>用户管理</span></h3>
+			<ul>
+				<c:if test="${login.permissionId==1}">
+					<li><a href="addUser.jsp" target="con">--用户添加</a></li>
+				</c:if>
+				<li><a href="/user/findAllUser" target="con">--用户列表</a></li>
+			</ul>
+		</c:if>
+
 		<h3 class="h2"><span>供应商管理</span></h3>
 		<ul>
-			<li><a href="addSupplier.jsp" target="con">--供应商添加</a></li>
+			<c:if test="${login.permissionId==1}">
+				<li><a href="addSupplier.jsp" target="con">--供应商添加</a></li>
+			</c:if>
 			<li><a href="supplierList.jsp" target="con">--供应商列表</a></li>
 		</ul>
     	<h3 class="h2"><span>物料管理</span></h3>
