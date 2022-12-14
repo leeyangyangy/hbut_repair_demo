@@ -125,7 +125,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>操作人</td>
 				<td>创建时间</td>
 				<td>修改时间</td>
-				<td>操作</td>
+				<c:if test="${login.permissionId==1}">
+					<td>操作</td>
+				</c:if>
 			</tr>
 			</thead>
 			<tbody>
@@ -139,9 +141,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${classify.updateTime}</td>
 					<td>
 							<%--			    			<a href="/getCustomerById?id=${user.userId}">用户详情</a>&nbsp;--%>
-						<a href="/classify/toFindClassify?id=${classify.id}">修改</a>&nbsp;
-
 						<c:if test="${login.permissionId==1}">
+							<a href="/classify/toFindClassify?id=${classify.id}">修改</a>&nbsp;
 							<a href="/classify/deleteClassifyById?id=${classify.id}" class="del">删除</a>&nbsp;
 						</c:if>
 					</td>

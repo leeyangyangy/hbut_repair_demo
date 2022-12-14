@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%--					<td>主键</td>--%>
 					<td>供应商名称</td>
 					<td>供应商简介</td>
-					<c:if test="${login.permissionId==1 ||login.permissionId==3}">
+					<c:if test="${login.permissionId==1}">
 						<td>操作</td>
 					</c:if>
 		    	</tr>
@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%--			    			<a href="/getCustomerById?id=${user.userId}">用户详情</a>&nbsp;--%>
 
 
-							<c:if test="${login.permissionId==1 || login.permissionId==3}">
+							<c:if test="${login.permissionId==1}">
 								<a href="/supplier/toUpdateSupplierById?id=${supplier.id}">修改</a>&nbsp;
 								<a href="/supplier/deleteSupplierById?id=${supplier.id}" class="del">删除</a>&nbsp;
 							</c:if>
